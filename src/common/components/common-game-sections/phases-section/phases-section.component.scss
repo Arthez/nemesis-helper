@@ -1,0 +1,52 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sizing-20);
+    padding: var(--sizing-20) var(--sizing-10);
+    width: 100%;
+
+    .buttons-container {
+        button {
+            width: 100%;
+        }
+    }
+
+    .phases-container {
+        display: flex;
+        flex-direction: column;
+        gap: var(--sizing-20);
+        overflow: auto;
+        flex: 1 1 0;
+        height: 0;
+        padding: var(--sizing-10);
+
+        .phase-label {
+            align-self: center;
+            margin-bottom: var(--sizing-10);
+        }
+
+        .stages-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sizing-10);
+
+            .stage {
+                display: flex;
+
+                &.active {
+                    font-weight: 600;
+                    color: var(--phases-stage-active-color);
+
+                    .arrow {
+                        visibility: visible;
+                    }
+                }
+
+                .arrow {
+                    padding: 0 var(--sizing-5);
+                    visibility: hidden;
+                }
+            }
+        }
+    }
+}

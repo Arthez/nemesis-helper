@@ -1,0 +1,29 @@
+<div class="select-game-container">
+    <div class="head-section-label">
+        <h1>{{ 'tk.select-game.label.select-game' | translate }}</h1>
+    </div>
+    <div class="game-tiles">
+        @for (gameData of games; track gameData.config.id) {
+            <app-select-game-tile
+                [gameData]="gameData"
+                [isSelected]="selectedGame?.config?.id === gameData.config.id"
+                (selected)="onGameSelect($event)"></app-select-game-tile>
+        }
+    </div>
+    <div class="buttons-container">
+        <button
+            mat-flat-button
+            color="primary"
+            [disabled]="!selectedGame"
+            (click)="setupNewGame()">
+            {{ 'tk.select-game.button.start-new-game' | translate }}
+        </button>
+        <button
+            mat-flat-button
+            color="primary"
+            [disabled]="!selectedGame?.saveState"
+            (click)="loadSavedGame()">
+            {{ 'tk.select-game.button.load-game' | translate }}
+        </button>
+    </div>
+</div>

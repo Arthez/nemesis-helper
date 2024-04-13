@@ -1,0 +1,13 @@
+@for (player of playersData(); track player.num) {
+    <button
+        mat-flat-button
+        color="primary"
+        [class.timer-active]="timer().player?.num === player.num"
+        [class.timer-enabled]="timerEnabled"
+        (click)="togglePlayerTimer(player.num)">
+        <div>({{ player.num }}) {{ player.name }}</div>
+        @if (timerEnabled) {
+            <div>{{ player.timeUsedMs | msToDuration }}</div>
+        }
+    </button>
+}

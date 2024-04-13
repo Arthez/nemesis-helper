@@ -1,0 +1,70 @@
+.game-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sizing-20);
+}
+
+.game-tile {
+    cursor: pointer;
+    transition: all 300ms;
+
+    &.selected {
+        transform: scale(1.15);
+
+        .game-tile-overlay {
+            background: var(--transparent);
+        }
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+
+        .game-tile-overlay {
+            background: rgba(var(--select-game-tile-overlay-color), 0.8) !important;
+        }
+    }
+
+    .game-tile-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+
+        span {
+            padding: var(--sizing-10);
+            margin-bottom: var(--sizing-20);
+            line-height: 30px;
+            text-align: center;
+        }
+    }
+}
+
+.game-save-info {
+    min-height: 180px;
+    height: 180px;
+    max-height: 180px;
+
+    .save-title {
+        font-weight: 700;
+    }
+
+    .text {
+        color: var(--secondary-text-color);
+    }
+
+    .players {
+        div {
+            margin: var(--sizing-5) 0;
+
+            div {
+                margin-left: var(--sizing-20);
+                max-width: 140px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}

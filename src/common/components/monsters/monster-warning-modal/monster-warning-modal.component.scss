@@ -1,0 +1,18 @@
+.monster-name {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.monster-tokens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--sizing-20);
+    margin: var(--sizing-20);
+}
+
+.important {
+    font-weight: 600;
+    color: var(--important-color);
+}

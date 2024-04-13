@@ -1,0 +1,42 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ data.titleKey | translate }}</div>
+    <div class="modal-content">
+        <p>{{ data.messageKey | translate }}</p>
+        <div class="monster-name">
+            <span>{{ data.monster.type | monsterTypeTk | translate }}</span>
+        </div>
+        <div class="monster-tokens">
+            <app-monster-item
+                [monster]="data.monster"
+                [showName]="false"></app-monster-item>
+            @if (data.showTokenBack && data.monster.type !== monsterType.BLANK) {
+                <app-monster-item
+                    [monster]="data.monster"
+                    [showName]="false"
+                    [flipped]="true"></app-monster-item>
+            }
+        </div>
+
+        @if (data.monster.type === monsterType.BLANK) {
+            <p class="important">{{ 'tk.config.label.monster-attack.blank' | translate }}</p>
+        }
+    </div>
+    <div class="modal-actions">
+        @if (data.noButtonKey) {
+            <button
+                mat-stroked-button
+                color="primary"
+                appNonFocusable
+                (click)="onClick(false)">
+                {{ data.noButtonKey | translate }}
+            </button>
+        }
+        <button
+            mat-flat-button
+            color="primary"
+            appNonFocusable
+            (click)="onClick(true)">
+            {{ data.yesButtonKey | translate }}
+        </button>
+    </div>
+</div>

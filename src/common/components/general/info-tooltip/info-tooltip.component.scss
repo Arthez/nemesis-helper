@@ -1,0 +1,10 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    mat-icon {
+        color: var(--info-tooltip-icon-color);
+        cursor: help;
+    }
+}

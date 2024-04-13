@@ -1,0 +1,57 @@
+@use './typography' as typography;
+
+.guidebook-styles {
+    .header {
+        display: flex;
+        margin-bottom: var(--sizing-10);
+        align-items: center;
+    }
+
+    .p,
+    .standard {
+        font-style: normal;
+        margin-bottom: var(--sizing-10);
+        color: var(--main-text-color);
+    }
+
+    .bold {
+        font-weight: 600;
+    }
+
+    .or {
+        color: var(--main-text-color);
+        text-transform: uppercase;
+        margin: var(--sizing-10) 0;
+        @include typography.font-16-800();
+    }
+
+    .cost {
+        border-radius: 10%;
+        padding: 0 var(--sizing-5);
+        background: var(--box-background-color);
+        color: var(--box-text-color);
+        margin-right: var(--sizing-5);
+        @include typography.font-16-800();
+    }
+
+    .heading2 {
+        text-transform: uppercase;
+        color: var(--heading-text-color);
+        @include typography.font-16-800();
+    }
+
+    .note {
+        font-style: italic;
+        color: var(--note-text-color);
+    }
+
+    .more {
+        font-style: italic;
+        color: var(--more-text-color);
+    }
+
+    .important {
+        font-weight: 600;
+        color: var(--important-color);
+    }
+}

@@ -1,0 +1,37 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ 'tk.id_short.monster-summary.title.summary' | gameIdTk: this.data.gameId | translate }}</div>
+    <div class="modal-content">
+        @for (configItem of summaryConfig; track configItem.buttonKey) {
+            @if (configItem.uncovered()) {
+                <div class="summary">
+                    <p>{{ configItem.containerKey | gameIdTk: this.data.gameId | translate }} ({{ configItem.monsters.length }})</p>
+                    <div>
+                        @for (monsterType of monstersTypes; track monsterType) {
+                            <span
+                                >{{ monsterType | monsterTypeTk | translate }}: <b>{{ configItem.monsters | monsterCount: monsterType }}</b
+                                >{{ $last ? '' : ', ' }}</span
+                            >
+                        }
+                    </div>
+                </div>
+            } @else {
+                <button
+                    mat-stroked-button
+                    color="primary"
+                    appNonFocusable
+                    (click)="configItem.uncovered.set(true)">
+                    {{ configItem.buttonKey | gameIdTk: this.data.gameId | translate }}
+                </button>
+            }
+        }
+    </div>
+    <div class="modal-actions">
+        <button
+            mat-flat-button
+            color="primary"
+            appNonFocusable
+            mat-dialog-close>
+            {{ 'tk.general.label.button.close' | translate }}
+        </button>
+    </div>
+</div>

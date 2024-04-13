@@ -1,0 +1,21 @@
+.monster-name {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sizing-20);
+    margin-bottom: var(--sizing-10);
+
+    .description {
+        font-style: italic;
+    }
+
+    .hint {
+        font-weight: 600;
+        color: var(--important-color);
+    }
+}

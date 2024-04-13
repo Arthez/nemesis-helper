@@ -1,0 +1,52 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ 'tk.nog.config.label.game-end.victory-check.title' | translate }}</div>
+    <div class="modal-content guidebook-styles">
+        <div>
+            @if (data.autodestructionHappened) {
+                <p class="p important">{{ 'tk.nog.config.label.game-end.victory-check.autodestruction' | translate }}</p>
+            }
+            <p class="p">{{ 'tk.nog.config.label.game-end.victory-check.message' | translate }}</p>
+        </div>
+        <div class="victory-check">
+            <p class="heading2">1) {{ 'tk.nog.config.label.game-end.victory-check.step1.title' | translate }}</p>
+            <p [innerHtml]="'tk.nog.config.label.game-end.victory-check.step1.description' | translate"></p>
+            <p class="heading2">2) {{ 'tk.nog.config.label.game-end.victory-check.step2.title' | translate }}</p>
+            <p [innerHtml]="'tk.nog.config.label.game-end.victory-check.step2.description' | translate"></p>
+            <p class="heading2">3) {{ 'tk.nog.config.label.game-end.victory-check.step3.title' | translate }}</p>
+            <p [innerHtml]="'tk.nog.config.label.game-end.victory-check.step3.description' | translate"></p>
+            <p class="heading2">4) {{ 'tk.nog.config.label.game-end.victory-check.step4.title' | translate }}</p>
+            <p [innerHtml]="'tk.nog.config.label.game-end.victory-check.step4.description' | translate"></p>
+        </div>
+        <div class="summary">
+            <div>
+                <p>
+                    <span>{{ 'tk.nog.config.label.game-end.summary.duration' | translate }}: </span>
+                    <span class="duration">{{ duration | msToDuration }}</span>
+                </p>
+            </div>
+            @for (player of data.players; track player.num) {
+                <div>
+                    <span class="player-name">({{ player.num }}) {{ player.name }}</span>
+                    @if (data.timerEnabled) {
+                        <span class="duration">{{ player.timeUsedMs | msToDuration }}</span>
+                    }
+                </div>
+            }
+        </div>
+        <mat-checkbox
+            tabindex="-1"
+            [(ngModel)]="agreeToFinish"
+            >{{ 'tk.nog.config.label.game-end.agree-to-finish' | translate }}</mat-checkbox
+        >
+    </div>
+    <div class="modal-actions">
+        <button
+            mat-flat-button
+            color="primary"
+            appNonFocusable
+            mat-dialog-close
+            [disabled]="!agreeToFinish">
+            {{ 'tk.general.label.button.finish' | translate }}
+        </button>
+    </div>
+</div>

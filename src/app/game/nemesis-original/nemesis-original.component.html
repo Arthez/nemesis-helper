@@ -1,0 +1,60 @@
+<mat-drawer-container autosize>
+    <mat-drawer
+        mode="side"
+        position="end"
+        [opened]="true">
+        <app-drawer-content
+            (openSearchRoomModal)="openSearchRoomModal()"
+            (openKeyMomentsModal)="openKeyMomentsModal()"
+            (openFaqModal)="openFaqModal()"
+            (openLogsModal)="openLogsModal()"
+            (goToLandingPage)="goToLandingPage()"></app-drawer-content>
+    </mat-drawer>
+    <div class="content">
+        <div class="top-container">
+            <app-section-wrapper
+                label="tk.game-section.label.players"
+                class="players">
+                <app-players-section
+                    [players]="gameSetupData?.players || []"
+                    [timerEnabled]="!!gameSetupData?.timerEnabled"
+                    (playerTimeChanged)="onPlayerTimeChange($event)"></app-players-section>
+            </app-section-wrapper>
+            <app-section-wrapper
+                label="tk.nog.game-section.label.round-tracker"
+                class="round-tracker">
+                <app-nog-round-tracker-section
+                    [rounds]="rounds()"
+                    [activeRoundNum]="activeRoundNum()"
+                    [endRoundNum]="endRoundNum()"
+                    [autodestruction]="autodestruction()"
+                    [hibernationRoundNum]="hibernationChambersOpeningRoundNum"
+                    (roundTrackerEvent)="onRoundTrackerEvent($event)">
+                </app-nog-round-tracker-section>
+            </app-section-wrapper>
+        </div>
+        <div class="bottom-container">
+            <app-section-wrapper label="tk.game-section.label.steps">
+                <app-phases-section
+                    [phasesConfig]="phasesConfig()"
+                    [activeStage]="activeStage()"
+                    (stage)="onStageChange($event)"></app-phases-section>
+            </app-section-wrapper>
+            <app-section-wrapper label="tk.game-section.label.step-description">
+                <app-summary-section [summary]="summaryData()"></app-summary-section>
+            </app-section-wrapper>
+            <app-section-wrapper
+                label="tk.nog.game-section.label.monsters"
+                class="monsters">
+                <app-monsters-section
+                    [activeMonsters]="activeMonsters()"
+                    [availableMonsters]="availableMonsters()"
+                    (draw)="drawMonster()"
+                    (add)="addMonster($event)"
+                    (details)="showMonstersDetails()"
+                    (monsterKill)="killMonster($event)"
+                    (monsterRetreat)="retreatMonster($event)"></app-monsters-section>
+            </app-section-wrapper>
+        </div>
+    </div>
+</mat-drawer-container>

@@ -1,0 +1,64 @@
+@if (selectedGame) {
+    <div class="selected-game-setup-container">
+        <div class="head-section-label">
+            <h1>{{ selectedGame.config.nameKey | translate }}</h1>
+        </div>
+        <div class="players">
+            @for (playerControl of form.controls.players.controls; let index = $index; track index) {
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'tk.selected-game-setup.label.player' | translate }}{{ index + 1 }}</mat-label>
+                    <input
+                        type="text"
+                        matInput
+                        [formControl]="playerControl" />
+                </mat-form-field>
+            }
+        </div>
+        <div class="game-mode">
+            <mat-radio-group
+                [formControl]="form.controls.gameMode"
+                color="primary">
+                <mat-radio-button [value]="gameMode.SEMI_COOP">{{ 'tk.config.label.game-mode.semi-co-op' | translate }}</mat-radio-button>
+                <mat-radio-button [value]="gameMode.FULL_COOP">{{ 'tk.config.label.game-mode.full-co-op' | translate }}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="randomize-players">
+            <mat-checkbox
+                [formControl]="form.controls.randomizePlayerNum"
+                color="primary">
+                {{ 'tk.selected-game-setup.label.randomize-players' | translate }}
+            </mat-checkbox>
+            <app-info-tooltip textKey="tk.selected-game-setup.tooltip.randomize-players"></app-info-tooltip>
+        </div>
+        <div class="timer">
+            <mat-checkbox
+                [formControl]="form.controls.timerEnabled"
+                color="primary">
+                {{ 'tk.selected-game-setup.label.enable-timer' | translate }}
+            </mat-checkbox>
+            <app-info-tooltip textKey="tk.selected-game-setup.tooltip.enable-timer"></app-info-tooltip>
+        </div>
+
+        @if (showError()) {
+            <div>
+                <span class="error">{{ 'tk.selected-game-setup.error.not-enough-players' | translate }}</span>
+            </div>
+        }
+        <div class="buttons-container">
+            <button
+                mat-stroked-button
+                color="primary"
+                appNonFocusable
+                (click)="onGoBackClick()">
+                {{ 'tk.selected-game-setup.button.go-back' | translate }}
+            </button>
+            <button
+                mat-flat-button
+                color="primary"
+                appNonFocusable
+                (click)="onStartGameClick()">
+                {{ 'tk.selected-game-setup.button.start-game' | translate }}
+            </button>
+        </div>
+    </div>
+}

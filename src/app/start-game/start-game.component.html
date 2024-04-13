@@ -1,0 +1,21 @@
+<mat-drawer-container autosize>
+    <mat-drawer
+        mode="side"
+        position="end"
+        [opened]="true">
+        <app-drawer-content></app-drawer-content>
+    </mat-drawer>
+    @if (showNewGameForm()) {
+        <app-selected-game-setup
+            [selectedGame]="selectedGame()"
+            (goBack)="goBackToGameSelection()"
+            (startGame)="startNewGame($event)"></app-selected-game-setup>
+    } @else {
+        <app-select-game
+            [games]="games"
+            [selectedGame]="selectedGame()"
+            (gameSelect)="onSelectedGame($event)"
+            (setupGame)="setupNewGame()"
+            (loadGame)="loadSavedGame()"></app-select-game>
+    }
+</mat-drawer-container>

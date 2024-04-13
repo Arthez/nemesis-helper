@@ -1,0 +1,40 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@include mat.core();
+
+$typography: mat.define-typography-config(
+    $font-family: 'Montserrat',
+);
+@include mat.all-component-typographies($typography);
+
+$theme-light-primary: mat.define-palette(mat.$indigo-palette);
+$theme-light-accent: mat.define-palette(mat.$orange-palette);
+$theme-light-warn: mat.define-palette(mat.$red-palette);
+$theme-light: mat.define-light-theme(
+    (
+        color: (
+            primary: $theme-light-primary,
+            accent: $theme-light-accent,
+            warn: $theme-light-warn,
+        ),
+    )
+);
+@include mat.all-component-themes($theme-light);
+
+$theme-dark-primary: mat.define-palette(mat.$blue-palette);
+$theme-dark-accent: mat.define-palette(mat.$amber-palette);
+$theme-dark-warn: mat.define-palette(mat.$deep-orange-palette);
+$theme-dark: mat.define-dark-theme(
+    (
+        color: (
+            primary: $theme-dark-primary,
+            accent: $theme-dark-accent,
+            warn: $theme-dark-warn,
+        ),
+    )
+);
+
+.dark-mode {
+    @include mat.all-component-colors($theme-dark);
+}

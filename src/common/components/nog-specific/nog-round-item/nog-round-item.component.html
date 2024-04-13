@@ -1,0 +1,17 @@
+@if (roundConfig) {
+    @if (autodestruction && autodestruction.roundNum === roundConfig.num) {
+        <div class="autodestruction">
+            <div [ngClass]="autodestruction.state">☢</div>
+        </div>
+    }
+    <div class="round-slot">
+        <div
+            class="round font-16-600"
+            [class.active-round]="activeRoundNum === roundConfig.num"
+            [class.hibernation]="roundConfig.num <= hibernationRoundNum"
+            [class.end-round]="roundConfig.num === endRoundNum"
+            [class.disabled]="roundConfig.num < endRoundNum || (autodestruction | autodestructionDisableRound: roundConfig.num)">
+            <div>{{ roundConfig.num === endRoundNum ? 'S' : roundConfig.num < endRoundNum || (autodestruction | autodestructionDisableRound: roundConfig.num) ? 'X' : roundConfig.num }}</div>
+        </div>
+    </div>
+}

@@ -1,0 +1,9 @@
+mat-drawer-container {
+    height: 100%;
+    mat-drawer-content {
+        background: var(--app-background-color) !important;
+    }
+    mat-drawer {
+        background: var(--drawer-background-color) !important;
+    }
+}

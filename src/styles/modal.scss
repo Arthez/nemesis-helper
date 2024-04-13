@@ -1,0 +1,72 @@
+@use './typography' as typography;
+
+@mixin modal-elements() {
+    display: flex;
+    flex-direction: column;
+    padding: var(--sizing-20);
+
+    .modal-wrapper {
+        display: flex;
+        flex-direction: column;
+        background: var(--modal-background-color);
+    }
+
+    .modal-header {
+        color: var(--modal-header-text-color);
+        background: var(--modal-header-background-color);
+        padding: var(--sizing-20);
+        text-align: center;
+        @include typography.font-20-600();
+    }
+
+    .modal-content {
+        color: var(--modal-content-text-color);
+        padding: var(--sizing-20);
+        margin: var(--sizing-10);
+        overflow: auto;
+        @include typography.font-16();
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: var(--sizing-20);
+        padding: var(--sizing-20);
+
+        button {
+            flex: 1;
+        }
+    }
+}
+
+.small-modal {
+    max-width: 500px;
+    width: 400px;
+
+    .modal-wrapper {
+        max-height: 60vh;
+    }
+
+    @include modal-elements();
+}
+
+.medium-modal {
+    max-width: 800px;
+    width: 600px;
+
+    .modal-wrapper {
+        max-height: 80vh;
+    }
+
+    @include modal-elements();
+}
+
+.large-modal {
+    max-width: 75vw;
+    width: 800px;
+
+    .modal-wrapper {
+        max-height: 80vh;
+    }
+
+    @include modal-elements();
+}

@@ -1,0 +1,10 @@
+@if (powerSupplyStateConfig && powerSupplyTranslationKey) {
+    <div class="supply-section">
+        <span class="font-16-600">{{ powerSupplyTranslationKey | translate }}</span>
+    </div>
+    <div
+        class="supply-container"
+        [class.active]="!!powerSupplyStateConfig.initState">
+        <span class="font-24-600">ϟ {{ powerSupplyStateConfig.num }}</span>
+    </div>
+}

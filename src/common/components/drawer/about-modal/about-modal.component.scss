@@ -1,0 +1,22 @@
+.modal-content {
+    display: flex;
+    flex-direction: column;
+
+    .base-info {
+        p span {
+            font-weight: 500;
+        }
+    }
+
+    .app-info {
+        div {
+            font-weight: 500;
+        }
+        ul {
+            margin: var(--sizing-5) 0;
+        }
+        li {
+            margin-bottom: var(--sizing-5);
+        }
+    }
+}

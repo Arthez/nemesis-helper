@@ -1,0 +1,30 @@
+<div class="modal-wrapper">
+    <div class="search-bar">
+        <mat-form-field
+            appearance="outline"
+            subscriptSizing="dynamic">
+            <mat-label>{{ 'tk.rooms-modal.label.find-room' | translate }}</mat-label>
+            <input
+                type="text"
+                matInput
+                [formControl]="searchControl" />
+        </mat-form-field>
+    </div>
+    <div class="modal-content">
+        @for (roomGroup of roomData(); let groupIndex = $index; track groupIndex) {
+            @if (roomGroup.items.length) {
+                <div class="group">
+                    <div class="group-label">{{ roomGroup.name }}</div>
+                    @for (room of roomGroup.items; let roomIndex = $index; track roomIndex) {
+                        <div class="room">
+                            <div class="room-name font-20-700">{{ room.name }}</div>
+                            <div
+                                class="room-content guidebook-styles"
+                                [innerHtml]="room.content"></div>
+                        </div>
+                    }
+                </div>
+            }
+        }
+    </div>
+</div>

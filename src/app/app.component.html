@@ -1,0 +1,6 @@
+<app-app-loader></app-app-loader>
+@if (appInitializerService.initFinished()) {
+    <router-outlet></router-outlet>
+} @else if (appInitializerService.initFailure()) {
+    <app-app-init-error></app-app-init-error>
+}

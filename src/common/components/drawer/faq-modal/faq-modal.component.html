@@ -1,0 +1,35 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ 'tk.id_short.faq-modal.title' | gameIdTk: this.data.gameId | translate }}</div>
+    <div class="group-links font-20-600">
+        @for (faqGroup of data.faqGroups; track $index) {
+            <span
+                (click)="scrollInto($index)"
+                class="group-link"
+                >{{ faqGroup.name | translate }}</span
+            >
+            @if (!$last) {
+                <span>•</span>
+            }
+        }
+    </div>
+    <div class="modal-content guidebook-styles">
+        @for (faqGroup of data.faqGroups; track $index) {
+            @if (faqGroup.name | translate; as faqGroupNameTranslated) {
+                <div
+                    class="group-label"
+                    [id]="'group' + $index">
+                    {{ faqGroupNameTranslated }}
+                </div>
+                <ol>
+                    @for (faqItem of faqGroup.items; track $index) {
+                        @if (faqItem | translate; as faqItemTranslated) {
+                            <li>
+                                <p [innerHtml]="faqItemTranslated"></p>
+                            </li>
+                        }
+                    }
+                </ol>
+            }
+        }
+    </div>
+</div>

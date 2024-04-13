@@ -1,0 +1,39 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ 'tk.logs-modal.title' | translate }}</div>
+    <div class="filters">
+        <form [formGroup]="filters">
+            <mat-checkbox
+                formControlName="event"
+                color="primary">
+                <span class="event">{{ 'tk.logs-modal.filter.event-type' | translate }}</span>
+            </mat-checkbox>
+            <mat-checkbox
+                formControlName="tracker"
+                color="primary">
+                <span class="tracker">{{ 'tk.logs-modal.filter.tracker-type' | translate }}</span>
+            </mat-checkbox>
+            <mat-checkbox
+                formControlName="monster"
+                color="primary">
+                <span class="monster">{{ 'tk.id_short.logs-modal.filter.monster-type' | gameIdTk: this.data.gameId | translate }}</span>
+            </mat-checkbox>
+        </form>
+    </div>
+    <div class="modal-content">
+        <div class="logs">
+            @for (logItem of logs(); track logItem.dateIso) {
+                <div
+                    class="log-item"
+                    [ngClass]="logItem.type">
+                    <span class="date">[{{ logItem.dateIso | date: 'HH:mm:ss' }}]</span>
+                    <span class="round-num">({{ logItem.roundNum }}):</span>
+                    <span class="text"> {{ logItem.text }}</span>
+                </div>
+            } @empty {
+                <div class="empty-logs font-16">
+                    <span>{{ 'tk.logs-modal.label.empty-logs' | translate }}</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>

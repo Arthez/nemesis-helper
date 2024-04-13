@@ -1,0 +1,48 @@
+@if (monster) {
+    @if (showName) {
+        <span class="font-16-600">{{ monster.type | monsterTypeTk | translate }}</span>
+    }
+    <div
+        class="token"
+        [matMenuTriggerFor]="showMenu ? tokenMenu : null"
+        [class.clickable]="showMenu">
+        @if (flippedS() && monster.type !== monsterType.BLANK) {
+            <div class="back">
+                @if (monster.powerInactive !== undefined) {
+                    <span class="power-active font-20-600">ϟ {{ monster.powerActive }}</span>
+                    <span class="power-inactive font-20-600">ϟ {{ monster.powerInactive }}</span>
+                } @else if (monster.surprise !== undefined) {
+                    <span class="surprise font-20-600">{{ monster.surprise }}</span>
+                    <span class="warning">warning</span>
+                }
+            </div>
+        } @else {
+            <img
+                [ngSrc]="monster.type | imageUrl: 'm' : 'jpg'"
+                width="64"
+                height="64"
+                priority="1" />
+        }
+    </div>
+    <mat-menu #tokenMenu="matMenu">
+        <button
+            mat-menu-item
+            (click)="onRotate()">
+            {{ 'tk.monster-item.button.rotate' | translate }}
+        </button>
+        @if (kill.observed) {
+            <button
+                mat-menu-item
+                (click)="kill.emit(monster)">
+                {{ 'tk.monster-item.button.kill' | translate }}
+            </button>
+        }
+        @if (retreat.observed) {
+            <button
+                mat-menu-item
+                (click)="retreat.emit(monster)">
+                {{ 'tk.monster-item.button.retreat' | translate }}
+            </button>
+        }
+    </mat-menu>
+}

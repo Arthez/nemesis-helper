@@ -1,0 +1,36 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ 'tk.id_short.monster-development.title.development' | gameIdTk: this.data.gameId | translate }}</div>
+    @if (data.developmentResult; as developmentResult) {
+        <div class="modal-content">
+            <span class="description">{{ developmentResult.token.type | monsterDevelopmentTk: data.monsterDevelopmentConfig | translate }}</span>
+            <app-monster-item [monster]="developmentResult.token"></app-monster-item>
+            <span class="hint">{{ developmentResult | monsterDevelopmentResultTk: data.monsterDevelopmentConfig | translate }}</span>
+        </div>
+        <div class="modal-actions">
+            @if (developmentResult.token.type === monsterType.QUEEN) {
+                <button
+                    mat-stroked-button
+                    color="primary"
+                    appNonFocusable
+                    (click)="onClick(true)">
+                    {{ 'tk.monster-development.button.queen.player-in-nest' | translate }}
+                </button>
+                <button
+                    mat-flat-button
+                    color="primary"
+                    appNonFocusable
+                    (click)="onClick(false)">
+                    {{ 'tk.monster-development.button.queen.player-not-in-nest' | translate }}
+                </button>
+            } @else {
+                <button
+                    mat-flat-button
+                    color="primary"
+                    appNonFocusable
+                    (click)="onClick(false)">
+                    {{ 'tk.general.label.button.continue' | translate }}
+                </button>
+            }
+        </div>
+    }
+</div>

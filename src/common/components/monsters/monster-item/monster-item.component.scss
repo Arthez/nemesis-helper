@@ -1,0 +1,56 @@
+$monster-token-size: 64px;
+$monster-token-border-size: 2px;
+$monster-token-border-radius: 50%;
+
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .token {
+        width: $monster-token-size;
+        height: $monster-token-size;
+
+        img {
+            border-radius: $monster-token-border-radius;
+            border: $monster-token-border-size solid var(--monster-token-back-border-color);
+            box-sizing: border-box;
+        }
+
+        .back {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: $monster-token-size;
+            height: $monster-token-size;
+            background: var(--monster-token-back-background-color);
+            border-radius: $monster-token-border-radius;
+            border: $monster-token-border-size solid var(--monster-token-back-border-color);
+            box-sizing: border-box;
+
+            .power-active {
+                color: var(--active-power-color);
+            }
+
+            .power-inactive {
+                color: var(--inactive-power-color);
+            }
+
+            .surprise {
+                line-height: 14px;
+                color: var(--box-text-color);
+            }
+
+            .warning {
+                font-size: 8px;
+                text-transform: uppercase;
+                color: var(--box-text-color);
+            }
+        }
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+}

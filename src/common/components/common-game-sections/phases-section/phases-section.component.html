@@ -1,0 +1,26 @@
+<div class="buttons-container">
+    <button
+        mat-flat-button
+        color="primary"
+        appNonFocusable
+        (click)="nextStage()">
+        <span>{{ 'tk.phases.button.next-stage' | translate }}</span>
+    </button>
+</div>
+<div class="phases-container">
+    @for (phase of phasesConfig; track phase.id) {
+        <div class="phase-container">
+            <div class="phase-label font-20-700">{{ phase.labelKey | translate }}</div>
+            <div class="stages-container">
+                @for (stage of phase.stages; track stage.stageId) {
+                    <div
+                        class="stage"
+                        [class.active]="activeStage === stage.stageId">
+                        <span class="arrow font-16">→</span>
+                        <span class="stage-label font-16">{{ stage.labelKey | translate }}</span>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

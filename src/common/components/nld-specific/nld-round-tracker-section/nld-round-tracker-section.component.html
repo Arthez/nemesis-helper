@@ -1,0 +1,62 @@
+<div>
+    @for (round of rounds; let index = $index; track round.num) {
+        <app-nld-round-item
+            [roundConfig]="round"
+            [isolationRoomOpeningRoundNum]="isolationRoomOpeningRoundNum"
+            [activeRoundNum]="activeRoundNum"
+            [activePower]="activePower"
+            [endRoundNum]="endRoundNum"
+            [autodestruction]="autodestruction"
+            [canMoveCssLeft]="canMoveCssLeft(index, round) && !(activeStage | playerActionsDisable: allowedStages)"
+            [canMoveCssRight]="canMoveCssRight(index, round) && !(activeStage | playerActionsDisable: allowedStages)"
+            [isFirstRound]="index === 0"
+            (cssMove)="onCssMoveEvent($event, round)"></app-nld-round-item>
+    }
+    <button
+        mat-flat-button
+        color="primary"
+        [matMenuTriggerFor]="tokenMenu">
+        <span>{{ 'tk.round.button.actions' | translate }}</span>
+    </button>
+    <mat-menu #tokenMenu="matMenu">
+        @if (activePower) {
+            <button
+                mat-menu-item
+                (click)="onRoundTrackerEvent('power_turn_off')">
+                {{ 'tk.nld.round.label.event.power.off' | translate }}
+            </button>
+        } @else {
+            <button
+                mat-menu-item
+                (click)="onRoundTrackerEvent('power_turn_on')">
+                {{ 'tk.nld.round.label.event.power.on' | translate }}
+            </button>
+        }
+        @if (autodestruction) {
+            <button
+                mat-menu-item
+                [disabled]="autodestruction.state === 'red'"
+                (click)="onRoundTrackerEvent('autodestruction_stop')">
+                {{ 'tk.nld.round.label.event.autodestruction.stop' | translate }}
+            </button>
+        } @else {
+            <button
+                mat-menu-item
+                (click)="onRoundTrackerEvent('autodestruction_start')">
+                {{ 'tk.nld.round.label.event.autodestruction.start' | translate }}
+            </button>
+        }
+
+        <button
+            mat-menu-item
+            [disabled]="!!alertProcedureActivatedRoundNum"
+            (click)="onRoundTrackerEvent('alert_procedure_trigger')">
+            {{ 'tk.nld.round.label.event.alert-procedure.trigger' | translate }}
+        </button>
+        <button
+            mat-menu-item
+            (click)="onRoundTrackerEvent('end_the_game')">
+            {{ 'tk.round.label.event.end-the-game.trigger' | translate }}
+        </button>
+    </mat-menu>
+</div>

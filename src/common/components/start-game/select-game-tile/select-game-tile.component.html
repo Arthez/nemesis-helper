@@ -1,0 +1,48 @@
+@if (gameData) {
+    <div class="game-container">
+        <mat-card
+            class="game-tile"
+            [class.selected]="isSelected"
+            [class.disabled]="gameData.config.disabled"
+            (click)="onGameClicked()">
+            <img
+                mat-card-image
+                [ngSrc]="gameData.config.imageUrl"
+                width="200"
+                height="200"
+                priority="1" />
+            <div
+                class="game-tile-overlay"
+                [@selectedTile]="isSelected">
+                @if (gameData.config.disabled) {
+                    <span class="font-24-600">{{ 'tk.game.label.disabled' | translate }}</span>
+                }
+            </div>
+        </mat-card>
+        <div class="game-save-info">
+            @if (gameData.saveState; as saveState) {
+                <div class="save-title">{{ 'tk.select-game.label.save-info-title.available' | translate }}</div>
+                <div class="save-details">
+                    <div class="save-date">
+                        <span class="text">{{ 'tk.select-game.label.save-details.date' | translate }}: </span>
+                        <span class="value">{{ saveState.createdDate | date: undefined : undefined : languageService.currentLanguage() }}</span>
+                    </div>
+                    <div class="game-mode">
+                        <span class="text">{{ 'tk.select-game.label.save-details.game-mode' | translate }}: </span>
+                        <span class="value">{{ saveState.gameMode | gameModeTk | translate }}</span>
+                    </div>
+                    <div class="players">
+                        <span class="text">{{ 'tk.select-game.label.save-details.players' | translate }}: </span>
+                        <div>
+                            @for (player of saveState.players; let index = $index; track index) {
+                                <div>- {{ player.name }} ({{ player.num }})</div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            } @else {
+                <div class="save-title">{{ 'tk.select-game.label.save-info-title.not-available' | translate }}</div>
+            }
+        </div>
+    </div>
+}

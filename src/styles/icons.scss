@@ -1,0 +1,10 @@
+$small-icon-size: 28px;
+
+mat-icon {
+    &.small-icon {
+        margin: 0 !important;
+        width: $small-icon-size !important;
+        height: $small-icon-size !important;
+        font-size: $small-icon-size !important;
+    }
+}

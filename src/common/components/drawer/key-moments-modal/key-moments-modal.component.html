@@ -1,0 +1,8 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ 'tk.id_short.key-moments-modal.title' | gameIdTk: this.data.gameId | translate }}</div>
+    <div class="modal-content guidebook-styles">
+        @for (keyMoment of data.keyMoments; track $index) {
+            <p [innerHtml]="keyMoment | translate"></p>
+        }
+    </div>
+</div>

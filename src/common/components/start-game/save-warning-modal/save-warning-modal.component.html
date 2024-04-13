@@ -1,0 +1,22 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ 'tk.save-warning-modal.title.warning' | translate: { gameName: (data.nameKey | translate) } }}</div>
+    <div class="modal-content">
+        <p>{{ 'tk.save-warning-modal.message.warning' | translate }}</p>
+    </div>
+    <div class="modal-actions">
+        <button
+            mat-stroked-button
+            color="primary"
+            appNonFocusable
+            (click)="onCancel()">
+            {{ 'tk.general.label.button.cancel' | translate }}
+        </button>
+        <button
+            mat-flat-button
+            color="primary"
+            appNonFocusable
+            (click)="onProceed()">
+            {{ 'tk.general.label.button.continue' | translate }}
+        </button>
+    </div>
+</div>

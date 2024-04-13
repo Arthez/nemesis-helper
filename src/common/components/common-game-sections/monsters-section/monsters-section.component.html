@@ -1,0 +1,44 @@
+<div class="buttons-container">
+    <button
+        mat-flat-button
+        color="primary"
+        appNonFocusable
+        (click)="draw.emit()">
+        {{ 'tk.monsters.button.draw' | translate }}
+    </button>
+    <button
+        mat-flat-button
+        color="primary"
+        appNonFocusable
+        [matMenuTriggerFor]="addMonsterMenu">
+        {{ 'tk.monsters.button.add' | translate }}
+    </button>
+    <mat-menu #addMonsterMenu="matMenu">
+        @for (monsterType of monstersTypes; track monsterType) {
+            <button
+                mat-menu-item
+                [disabled]="!(availableMonsters | monsterAttainable: monsterType)"
+                (click)="add.emit(monsterType)">
+                {{ monsterType | monsterTypeTk | translate }}
+            </button>
+        }
+    </mat-menu>
+    <button
+        mat-flat-button
+        color="primary"
+        appNonFocusable
+        (click)="details.emit()">
+        {{ 'tk.monsters.button.details' | translate }}
+    </button>
+</div>
+<div class="monsters">
+    <div>
+        @for (monster of activeMonsters; track monster.id) {
+            <app-monster-item
+                [monster]="monster"
+                [showMenu]="true"
+                (kill)="onMonsterKill($event)"
+                (retreat)="onMonsterRetreat($event)"></app-monster-item>
+        }
+    </div>
+</div>

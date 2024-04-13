@@ -1,0 +1,78 @@
+body {
+    font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+}
+
+@mixin font-24-600() {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+}
+
+@mixin font-20-700() {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+}
+
+@mixin font-20-600() {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}
+
+@mixin font-16-800() {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+}
+
+@mixin font-16-600() {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+@mixin font-16() {
+    font-size: 16px !important;
+}
+
+.font-24-600 {
+    @include font-24-600();
+}
+
+.font-20-700 {
+    @include font-20-700();
+}
+
+.font-20-600 {
+    @include font-20-600();
+}
+
+.font-16-800 {
+    @include font-16-800();
+}
+
+.font-16-600 {
+    @include font-16-600();
+}
+
+.font-16 {
+    @include font-16();
+}
+
+.app-label {
+    font-size: 40px;
+}
+
+.group-label {
+    padding: var(--sizing-5);
+    margin-bottom: var(--sizing-20);
+    border-bottom: solid 1px var(--help-group-name-color);
+    color: var(--help-group-name-color);
+    text-transform: uppercase;
+    @include font-24-600();
+}
+
+.head-section-label {
+    margin-bottom: var(--sizing-20);
+
+    h1 {
+        color: var(--help-group-name-color);
+        @include font-24-600();
+    }
+}

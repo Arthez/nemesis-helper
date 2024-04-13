@@ -1,0 +1,96 @@
+<div class="drawer-content">
+    <div class="top">
+        <div class="config">
+            <button
+                mat-button
+                color="primary"
+                [matTooltip]="'tk.drawer.tooltip.change-language' | translate"
+                [matTooltipShowDelay]="tooltipShowDelay"
+                (click)="changeLanguage()">
+                <span class="font-16">{{ 'tk.general.language' | translate }}</span>
+            </button>
+            <button
+                mat-button
+                color="primary"
+                [matTooltip]="'tk.drawer.tooltip.change-ui-mode' | translate"
+                [matTooltipShowDelay]="tooltipShowDelay"
+                (click)="changeUiMode()">
+                <mat-icon
+                    [svgIcon]="uiModeService.isDarkMode() ? 'dark_mode' : 'light_mode'"
+                    class="small-icon"></mat-icon>
+            </button>
+        </div>
+        @if (openSearchRoomModal.observed) {
+            <button
+                mat-button
+                color="primary"
+                [matTooltip]="'tk.drawer.tooltip.search-room' | translate"
+                [matTooltipShowDelay]="tooltipShowDelay"
+                (click)="openSearchRoomModal.emit()">
+                <mat-icon
+                    svgIcon="hexagon"
+                    class="small-icon"></mat-icon>
+            </button>
+        }
+        @if (openFaqModal.observed) {
+            <button
+                mat-button
+                color="primary"
+                [matTooltip]="'tk.drawer.tooltip.faq' | translate"
+                [matTooltipShowDelay]="tooltipShowDelay"
+                (click)="openFaqModal.emit()">
+                <mat-icon
+                    svgIcon="quiz"
+                    class="small-icon"></mat-icon>
+            </button>
+        }
+        @if (openKeyMomentsModal.observed) {
+            <button
+                mat-button
+                color="primary"
+                [matTooltip]="'tk.drawer.tooltip.key-moments' | translate"
+                [matTooltipShowDelay]="tooltipShowDelay"
+                (click)="openKeyMomentsModal.emit()">
+                <mat-icon
+                    svgIcon="assignment_late"
+                    class="small-icon"></mat-icon>
+            </button>
+        }
+        @if (openLogsModal.observed) {
+            <button
+                mat-button
+                color="primary"
+                [matTooltip]="'tk.drawer.tooltip.game-logs' | translate"
+                [matTooltipShowDelay]="tooltipShowDelay"
+                (click)="openLogsModal.emit()">
+                <mat-icon
+                    svgIcon="overview"
+                    class="small-icon"></mat-icon>
+            </button>
+        }
+    </div>
+    <div class="bottom">
+        <button
+            mat-button
+            color="primary"
+            [matTooltip]="'tk.drawer.tooltip.about' | translate"
+            [matTooltipShowDelay]="tooltipShowDelay"
+            (click)="openAboutModal()">
+            <mat-icon
+                svgIcon="help"
+                class="small-icon"></mat-icon>
+        </button>
+        @if (goToLandingPage.observed) {
+            <button
+                mat-button
+                color="primary"
+                [matTooltip]="'tk.drawer.tooltip.new-game' | translate"
+                [matTooltipShowDelay]="tooltipShowDelay"
+                (click)="goToLandingPage.emit()">
+                <mat-icon
+                    svgIcon="exit_to_app"
+                    class="small-icon"></mat-icon>
+            </button>
+        }
+    </div>
+</div>

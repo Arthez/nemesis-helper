@@ -1,0 +1,26 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ data.titleKey | translate }}</div>
+    <div class="modal-content">
+        <p>{{ data.messageKey | translate }}</p>
+    </div>
+    <div class="modal-actions">
+        @if (data.noButtonKey) {
+            <button
+                mat-stroked-button
+                color="primary"
+                appNonFocusable
+                (click)="onClick(false)">
+                {{ data.noButtonKey | translate }}
+            </button>
+        }
+        @if (data.yesButtonKey) {
+            <button
+                mat-flat-button
+                color="primary"
+                appNonFocusable
+                (click)="onClick(true)">
+                {{ data.yesButtonKey | translate }}
+            </button>
+        }
+    </div>
+</div>

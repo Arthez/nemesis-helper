@@ -1,0 +1,27 @@
+.select-game-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sizing-40);
+    padding: var(--sizing-40);
+    min-width: 220px;
+
+    .head-section-label,
+    .game-tiles {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--sizing-40);
+    }
+
+    .buttons-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: min(var(--sizing-80), 6vw);
+
+        button {
+            min-width: 200px;
+            width: 200px;
+        }
+    }
+}

@@ -1,0 +1,49 @@
+@if (roundConfig) {
+    @if (autodestruction && autodestruction.roundNum === roundConfig.num) {
+        <div class="autodestruction">
+            <div [ngClass]="autodestruction.state">☢</div>
+        </div>
+    }
+    <div class="round-slot">
+        @if (!isFirstRound) {
+            <div
+                class="power-indicator"
+                [class.active]="roundConfig.powerActive"
+                [class.inactive]="roundConfig.powerInactive"></div>
+        }
+        <div
+            class="round font-16-600"
+            [class.before-isolation]="roundConfig.num > isolationRoomOpeningRoundNum"
+            [class.active-round]="activeRoundNum === roundConfig.num"
+            [class.end-round]="roundConfig.num === endRoundNum"
+            [class.disabled]="roundConfig.num < endRoundNum || (autodestruction | autodestructionDisableRound: roundConfig.num)">
+            <div [@activePower]="activeRoundNum === roundConfig.num ? activePower : null">{{ roundConfig.num === endRoundNum ? 'S' : roundConfig.num < endRoundNum || (autodestruction | autodestructionDisableRound: roundConfig.num) ? 'X' : roundConfig.num }}</div>
+        </div>
+    </div>
+    <div class="css-slot">
+        @if (roundConfig.css) {
+            <div
+                class="css"
+                [@launch]="roundConfig.css.launched"
+                [class.launched]="roundConfig.css.launched"
+                [class.disabled]="roundConfig.num < endRoundNum"
+                [matMenuTriggerFor]="cssMenu">
+                <span>{{ 'tk.nld.round.label.css' | translate }}{{ roundConfig.css.slotNum }}</span>
+            </div>
+            <mat-menu #cssMenu="matMenu">
+                <button
+                    mat-menu-item
+                    [disabled]="!canMoveCssLeft"
+                    (click)="emitMoveCssLeft()">
+                    {{ 'tk.nld.round.label.css.move-left' | translate }}
+                </button>
+                <button
+                    mat-menu-item
+                    [disabled]="!canMoveCssRight"
+                    (click)="emitMoveCssRight()">
+                    {{ 'tk.nld.round.label.css.move-right' | translate }}
+                </button>
+            </mat-menu>
+        }
+    </div>
+}

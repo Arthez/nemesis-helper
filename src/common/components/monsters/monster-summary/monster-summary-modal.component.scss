@@ -1,0 +1,17 @@
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sizing-40);
+    margin-bottom: var(--sizing-20);
+
+    button {
+        flex: 1;
+        min-height: 52px;
+    }
+
+    .summary {
+        p {
+            font-weight: 600;
+        }
+    }
+}

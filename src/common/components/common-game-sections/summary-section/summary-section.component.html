@@ -1,0 +1,6 @@
+@if (summary) {
+    <div class="title font-20-700">{{ summary.name | translate }}</div>
+    <div class="content guidebook-styles">
+        <p [innerHtml]="summary.content | translate"></p>
+    </div>
+}

@@ -1,0 +1,19 @@
+.group-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sizing-10);
+    padding: 0 var(--sizing-20);
+    margin: var(--sizing-10) 0;
+    color: var(--primary-color-500);
+
+    .group-link {
+        cursor: pointer;
+    }
+}
+
+.modal-content {
+    ol > li::marker {
+        font-weight: 600;
+    }
+}

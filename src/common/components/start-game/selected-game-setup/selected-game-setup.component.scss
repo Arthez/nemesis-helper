@@ -1,0 +1,38 @@
+.selected-game-setup-container {
+    padding: var(--sizing-40);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--sizing-40);
+    min-width: 220px;
+
+    .players {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--sizing-40);
+        justify-content: center;
+        max-width: 800px;
+        padding: 0 var(--sizing-40);
+    }
+
+    .randomize-players,
+    .timer {
+        display: flex;
+        gap: var(--sizing-10);
+    }
+
+    .buttons-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: min(var(--sizing-80), 6vw);
+
+        button {
+            width: 200px;
+        }
+    }
+
+    .error {
+        color: var(--error-text-color);
+    }
+}

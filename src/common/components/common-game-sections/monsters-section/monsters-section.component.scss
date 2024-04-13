@@ -1,0 +1,31 @@
+:host {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: var(--sizing-20) var(--sizing-10);
+    gap: var(--sizing-20);
+
+    .buttons-container {
+        gap: var(--sizing-20);
+        display: flex;
+        flex-wrap: wrap;
+
+        button {
+            flex: 1;
+            min-width: 100px;
+        }
+    }
+
+    .monsters {
+        overflow: auto;
+        flex: 1 1 0;
+        height: 0;
+        padding: var(--sizing-10);
+
+        > div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--sizing-10);
+        }
+    }
+}

@@ -1,0 +1,31 @@
+.modal-wrapper {
+    min-height: 400px;
+    height: 600px;
+}
+
+.search-bar {
+    margin: var(--sizing-20);
+
+    mat-form-field {
+        width: 100%;
+    }
+}
+
+.modal-content {
+    overflow: auto;
+
+    .group {
+        padding-bottom: var(--sizing-20);
+    }
+}
+
+.room {
+    margin-left: var(--sizing-20);
+    padding-bottom: var(--sizing-20);
+    max-width: 800px;
+
+    .room-name {
+        color: var(--help-item-name-color);
+        margin-bottom: var(--sizing-10);
+    }
+}

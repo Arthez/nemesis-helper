@@ -1,0 +1,130 @@
+$round-item-size: 40px;
+$css-size: 30px;
+$css-padding: calc(($round-item-size - $css-size) / 2);
+
+:host {
+    display: flex;
+    flex-direction: column;
+
+    .autodestruction {
+        position: relative;
+        width: 0;
+        height: 0;
+        z-index: 5;
+
+        .yellow {
+            color: var(--autodestruction-active-color);
+        }
+
+        .red {
+            color: var(--autodestruction-inevitable-color);
+        }
+
+        > div {
+            position: absolute;
+            left: 24px;
+            top: -8px;
+            font-size: 24px;
+            background: var(--autodestruction-background-color);
+            border-radius: 50%;
+        }
+    }
+
+    .round-slot {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .power-indicator {
+        width: 4px;
+        margin: 0 var(--sizing-5);
+        height: 100%;
+        border-radius: 4px;
+        background: var(--transparent);
+
+        &.inactive {
+            background: var(--inactive-power-color);
+        }
+
+        &.active {
+            background: var(--active-power-color);
+        }
+    }
+
+    .round {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: $round-item-size;
+        height: $round-item-size;
+        border: solid 2px var(--round-border-color);
+        border-radius: 10%;
+
+        &.before-isolation {
+            border-color: var(--nld-round-border-color);
+        }
+
+        &.end-round {
+            transform: rotate(90deg);
+            color: var(--round-end-indicator-color);
+
+            &.active-round {
+                color: var(--main-text-color);
+            }
+        }
+
+        &.disabled {
+            background: var(--round-disabled-color);
+        }
+
+        div {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &.active-round > div {
+            border-radius: 50%;
+        }
+    }
+
+    .css-slot {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        height: $round-item-size;
+        padding: $css-padding;
+
+        .css {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: $css-size;
+            height: $css-size;
+            margin-right: var(--sizing-10);
+            border-radius: 100% 100% 40% 40%;
+            border: solid 2px var(--css-slot-color);
+            background: var(--css-slot-color);
+            cursor: pointer;
+
+            &.disabled {
+                border-color: var(--css-disabled-color);
+                background: var(--css-disabled-color);
+            }
+
+            &.launched {
+                border-color: var(--css-launched-color);
+                background: var(--css-launched-color);
+            }
+
+            span {
+                font-size: 10px;
+                color: var(--css-text-color);
+            }
+        }
+    }
+}

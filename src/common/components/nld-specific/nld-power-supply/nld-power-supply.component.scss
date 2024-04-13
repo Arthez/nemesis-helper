@@ -1,0 +1,30 @@
+$power-supply-token-size: 60px;
+
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sizing-5);
+
+    .supply-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .supply-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: $power-supply-token-size;
+        height: $power-supply-token-size;
+        border-radius: 10%;
+        border: 2px solid var(--power-supply-border-color);
+        background: var(--power-supply-background-color);
+        color: var(--inactive-power-color);
+
+        &.active {
+            color: var(--active-power-color);
+        }
+    }
+}

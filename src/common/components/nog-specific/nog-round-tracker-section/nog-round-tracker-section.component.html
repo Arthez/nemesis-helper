@@ -1,0 +1,37 @@
+<div>
+    @for (round of rounds; let index = $index; track round.num) {
+        <app-nog-round-item
+            [roundConfig]="round"
+            [activeRoundNum]="activeRoundNum"
+            [endRoundNum]="endRoundNum"
+            [autodestruction]="autodestruction"
+            [hibernationRoundNum]="hibernationRoundNum"></app-nog-round-item>
+    }
+    <button
+        mat-flat-button
+        color="primary"
+        [matMenuTriggerFor]="tokenMenu">
+        <span>{{ 'tk.round.button.actions' | translate }}</span>
+    </button>
+    <mat-menu #tokenMenu="matMenu">
+        @if (autodestruction) {
+            <button
+                mat-menu-item
+                [disabled]="autodestruction.state === 'red'"
+                (click)="onRoundTrackerEvent('autodestruction_stop')">
+                {{ 'tk.nog.round.label.event.autodestruction.stop' | translate }}
+            </button>
+        } @else {
+            <button
+                mat-menu-item
+                (click)="onRoundTrackerEvent('autodestruction_start')">
+                {{ 'tk.nog.round.label.event.autodestruction.start' | translate }}
+            </button>
+        }
+        <button
+            mat-menu-item
+            (click)="onRoundTrackerEvent('end_the_game')">
+            {{ 'tk.round.label.event.end-the-game.trigger' | translate }}
+        </button>
+    </mat-menu>
+</div>

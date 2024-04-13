@@ -1,0 +1,45 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ 'tk.game-setup-modal.title.setup' | translate }}</div>
+    <div class="modal-content">
+        <div>
+            <p>{{ 'tk.game-setup-modal.label.players' | translate }}</p>
+            <ul>
+                @for (player of data.players; let index = $index; track index) {
+                    <li>
+                        {{ player.name }} (<span>{{ player.num }}</span
+                        >)
+                    </li>
+                }
+            </ul>
+        </div>
+        @if (data.gameId === 'nemesisLockdown' && data.powerSupplyData; as powerSupplyData) {
+            <div class="supply-sections">
+                <div>
+                    <app-nld-power-supply
+                        [powerSupplyTranslationKey]="powerSupplySections.Elv.key"
+                        [powerSupplyStateConfig]="powerSupplyData.Elv"></app-nld-power-supply>
+                </div>
+                <div>
+                    <app-nld-power-supply
+                        [powerSupplyTranslationKey]="powerSupplySections.S01.key"
+                        [powerSupplyStateConfig]="powerSupplyData.S01"></app-nld-power-supply>
+                    <app-nld-power-supply
+                        [powerSupplyTranslationKey]="powerSupplySections.S02.key"
+                        [powerSupplyStateConfig]="powerSupplyData.S02"></app-nld-power-supply>
+                    <app-nld-power-supply
+                        [powerSupplyTranslationKey]="powerSupplySections.S03.key"
+                        [powerSupplyStateConfig]="powerSupplyData.S03"></app-nld-power-supply>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="modal-actions">
+        <button
+            mat-flat-button
+            color="primary"
+            appNonFocusable
+            (click)="onOk()">
+            {{ 'tk.general.label.button.continue' | translate }}
+        </button>
+    </div>
+</div>

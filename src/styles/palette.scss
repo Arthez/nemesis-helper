@@ -1,0 +1,146 @@
+@use '@angular/material' as mat;
+@use 'material-theme' as theme;
+
+:root {
+    --transparent: transparent;
+    --primary-color-500: #{mat.get-theme-color(theme.$theme-light, primary, 500)};
+
+    --box-text-color: white;
+    --box-background-color: var(--heading-text-color);
+
+    --sections-color: var(--primary-color-500);
+    --sections-bg-color: var(--app-background-color);
+
+    --main-text-color: black;
+    --secondary-text-color: dimgray;
+    --error-text-color: #{mat.get-theme-color(theme.$theme-light, warn, 600)};
+    --heading-text-color: #{mat.get-theme-color(theme.$theme-light, primary, 900)};
+    --note-text-color: gray;
+    --more-text-color: #7986cb;
+    --important-color: #{mat.get-theme-color(theme.$theme-light, warn, 600)};
+
+    --active-power-color: deepskyblue;
+    --inactive-power-color: orangered;
+
+    --nog-round-active-color: deepskyblue;
+    --nog-round-border-color: deepskyblue;
+    --nld-round-border-color: #e09706;
+
+    --round-border-color: dimgray;
+    --round-disabled-color: #c3c3c3;
+    --round-end-indicator-color: red;
+    --css-slot-color: #8b4513;
+    --css-disabled-color: var(--round-disabled-color);
+    --css-launched-color: #c5a289;
+    --css-text-color: white;
+
+    --autodestruction-active-color: yellow;
+    --autodestruction-inevitable-color: red;
+    --autodestruction-background-color: black;
+
+    --monster-token-back-background-color: #1e1e1e;
+    --monster-token-back-border-color: white;
+
+    --power-supply-background-color: var(--monster-token-back-background-color);
+    --power-supply-border-color: var(--power-supply-background-color);
+
+    --help-group-name-color: var(--main-text-color);
+    --help-item-name-color: var(--secondary-text-color);
+
+    --phases-stage-active-color: blue;
+
+    --players-timer-active: orangered;
+
+    --select-game-tile-overlay-color: 224, 224, 224;
+
+    --logs-monster-type-color: #{mat.get-theme-color(theme.$theme-light, warn, 900)};
+    --logs-event-type-color: #b97f00;
+    --logs-tracker-type-color: #6d0dbd;
+
+    --info-tooltip-icon-color: var(--primary-color-500);
+
+    --app-background-color: #ffffff;
+    --drawer-background-color: var(--mat-sidenav-content-background-color);
+    --drawer-divider-color: var(--mat-sidenav-container-divider-color);
+    --modal-background-color: var(--app-background-color);
+    --modal-header-background-color: var(--primary-color-500);
+    --modal-header-text-color: var(--box-text-color);
+    --modal-content-text-color: var(--main-text-color);
+
+    --scroll-thumb-color: var(--primary-color-500);
+    --scroll-track-background-color: #e7e7e7;
+    --scroll-track-border-color: #cacaca;
+
+    .dark-mode {
+        color-scheme: dark;
+
+        --transparent: transparent;
+        --primary-color-500: #{mat.get-theme-color(theme.$theme-dark, primary, 500)};
+
+        --box-text-color: white;
+        --box-background-color: var(--heading-text-color);
+
+        --sections-color: var(--primary-color-500);
+        --sections-bg-color: var(--app-background-color);
+
+        --main-text-color: white;
+        --secondary-text-color: #b4b4b4;
+        --error-text-color: #{mat.get-theme-color(theme.$theme-dark, warn, 600)};
+        --heading-text-color: #{mat.get-theme-color(theme.$theme-dark, primary, 700)};
+        --note-text-color: #b2b2a2;
+        --more-text-color: #6f91c2;
+        --important-color: #{mat.get-theme-color(theme.$theme-dark, warn, 600)};
+
+        --active-power-color: deepskyblue;
+        --inactive-power-color: orangered;
+
+        --nog-round-active-color: deepskyblue;
+        --nog-round-border-color: deepskyblue;
+        --nld-round-border-color: #e09706;
+
+        --round-border-color: #c8c8c8;
+        --round-disabled-color: #808080;
+        --round-end-indicator-color: red;
+        --css-slot-color: #b65f1c;
+        --css-disabled-color: var(--round-disabled-color);
+        --css-launched-color: #c5a289;
+        --css-text-color: white;
+
+        --autodestruction-active-color: yellow;
+        --autodestruction-inevitable-color: red;
+        --autodestruction-background-color: black;
+
+        --monster-token-back-background-color: #1e1e1e;
+        --monster-token-back-border-color: white;
+
+        --power-supply-background-color: var(--monster-token-back-background-color);
+        --power-supply-border-color: var(--monster-token-back-border-color);
+
+        --help-group-name-color: var(--main-text-color);
+        --help-item-name-color: var(--secondary-text-color);
+
+        --phases-stage-active-color: #{mat.get-theme-color(theme.$theme-dark, primary, A100)};
+
+        --players-timer-active: orangered;
+
+        --select-game-tile-overlay-color: 80, 80, 80;
+
+        --logs-monster-type-color: #ff2828;
+        --logs-event-type-color: #e7a212;
+        --logs-tracker-type-color: #aa4cfd;
+
+        --info-tooltip-icon-color: var(--primary-color-500);
+
+        --app-background-color: #222222;
+        --drawer-background-color: var(--mat-sidenav-content-background-color);
+        --drawer-divider-color: var(--mat-sidenav-container-divider-color);
+        --modal-background-color: var(--mat-sidenav-content-background-color);
+        --modal-header-background-color: var(--primary-color-500);
+        --modal-header-text-color: var(--box-text-color);
+        --modal-content-text-color: var(--main-text-color);
+
+        --scroll-thumb-color: var(--primary-color-500);
+        --scroll-track-background-color: #5a5a5a;
+        --scroll-track-border-color: #464646;
+    }
+}

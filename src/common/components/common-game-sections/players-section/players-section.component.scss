@@ -1,0 +1,32 @@
+$button-width: 140px;
+$button-padding: var(--sizing-5);
+
+:host {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax($button-width, 1fr));
+    padding: var(--sizing-20);
+    gap: var(--sizing-20);
+
+    button {
+        flex: 1;
+        min-width: $button-width;
+        min-height: 40px;
+        padding: $button-padding;
+        cursor: default;
+
+        &.timer-enabled {
+            cursor: pointer;
+        }
+
+        &.timer-active {
+            background: var(--players-timer-active);
+        }
+
+        div {
+            max-width: calc($button-width - 2 * $button-padding);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
