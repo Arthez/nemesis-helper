@@ -357,7 +357,6 @@ describe('MonsterTokensService', () => {
         });
     });
 
-    // TODO unit-tests for not null param
     describe('getMonsterEncounterFromBag', () => {
         describe('for random encounter (null)', () => {
             it('should NOT transfer anything when bag is empty', () => {

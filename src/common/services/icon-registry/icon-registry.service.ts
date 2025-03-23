@@ -20,6 +20,8 @@ export class IconRegistryService {
         { iconName: 'info', assetPath: 'assets/icons/info.svg '},
         { iconName: 'help', assetPath: 'assets/icons/help.svg '},
         { iconName: 'quiz', assetPath: 'assets/icons/quiz.svg '},
+        { iconName: 'rotate', assetPath: 'assets/icons/rotate.svg '},
+        { iconName: 'trash_x', assetPath: 'assets/icons/trash_x.svg '},
         { iconName: 'light_mode', assetPath: 'assets/icons/light_mode.svg '},
         { iconName: 'dark_mode', assetPath: 'assets/icons/dark_mode.svg '},
     ];

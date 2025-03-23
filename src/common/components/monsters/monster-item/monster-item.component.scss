@@ -54,3 +54,9 @@ $monster-token-border-radius: 50%;
         cursor: pointer;
     }
 }
+
+.icon-with-label {
+    display: flex;
+    align-items: center;
+    gap: var(--sizing-5);
+}

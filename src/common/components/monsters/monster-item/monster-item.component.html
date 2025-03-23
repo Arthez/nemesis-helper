@@ -28,20 +28,29 @@
         <button
             mat-menu-item
             (click)="onRotate()">
-            {{ 'tk.monster-item.button.rotate' | translate }}
+            <div class="icon-with-label">
+                <span>{{ 'tk.monster-item.button.rotate' | translate }}</span>
+                <mat-icon svgIcon="rotate"></mat-icon>
+            </div>
         </button>
         @if (kill.observed) {
             <button
                 mat-menu-item
                 (click)="kill.emit(monster)">
-                {{ 'tk.monster-item.button.kill' | translate }}
+                <div class="icon-with-label">
+                    <span>{{ 'tk.monster-item.button.kill' | translate }}</span>
+                    <mat-icon svgIcon="trash_x"></mat-icon>
+                </div>
             </button>
         }
         @if (retreat.observed) {
             <button
                 mat-menu-item
                 (click)="retreat.emit(monster)">
-                {{ 'tk.monster-item.button.retreat' | translate }}
+                <div class="icon-with-label">
+                    <span>{{ 'tk.monster-item.button.retreat' | translate }}</span>
+                    <mat-icon svgIcon="bag"></mat-icon>
+                </div>
             </button>
         }
     </mat-menu>
