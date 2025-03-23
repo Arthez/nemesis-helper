@@ -216,6 +216,8 @@
     "tk.phases.button.next-stage": "Następny krok",
 
     "tk.monsters.button.draw": "Spotkanie",
+    "tk.monsters.button.draw.random": "LOSOWE",
+    "tk.monsters.button.draw.manual": "Wybierz",
     "tk.monsters.button.add": "Dodaj",
     "tk.monsters.button.details": "Podgląd",
     "tk.monsters.label.active-monsters": "Aktywne",

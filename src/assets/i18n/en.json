@@ -216,6 +216,8 @@
     "tk.phases.button.next-stage": "Next step",
 
     "tk.monsters.button.draw": "Encounter",
+    "tk.monsters.button.draw.random": "RANDOM",
+    "tk.monsters.button.draw.manual": "Choose",
     "tk.monsters.button.add": "Add",
     "tk.monsters.button.details": "Preview",
     "tk.monsters.label.active-monsters": "Active",

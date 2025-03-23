@@ -149,8 +149,8 @@ export class NemesisOriginalComponent {
         }
     }
 
-    protected drawMonster(): void {
-        const monster: MonsterTokenConfig | undefined = this.monsterBagService.getMonsterEncounterFromBag();
+    protected drawMonster(monsterType: MonsterType | null): void {
+        const monster: MonsterTokenConfig | undefined = this.monsterBagService.getMonsterEncounterFromBag(monsterType);
         if (monster) {
             this.nemesisOriginalLoggerService.logMonsterEncounter(monster);
             this.nemesisOriginalModalService.openMonsterWarning(monster).subscribe(() => {

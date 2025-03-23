@@ -34,8 +34,9 @@ export class MonstersSectionComponent {
 
     @Input({ required: true }) public activeMonsters: MonsterTokenBase[] = [];
     @Input({ required: true }) public availableMonsters: MonsterTokenBase[] = [];
+    @Input({ required: true }) public bagMonsters: MonsterTokenBase[] = [];
 
-    @Output() public draw: EventEmitter<void> = new EventEmitter<void>();
+    @Output() public draw: EventEmitter<MonsterType | null> = new EventEmitter<MonsterType | null>();
     @Output() public add: EventEmitter<MonsterType> = new EventEmitter<MonsterType>();
     @Output() public details: EventEmitter<void> = new EventEmitter<void>();
     @Output() public monsterKill: EventEmitter<MonsterTokenBase> = new EventEmitter<MonsterTokenBase>();

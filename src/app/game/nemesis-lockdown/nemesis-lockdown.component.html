@@ -53,7 +53,8 @@
                 <app-monsters-section
                     [activeMonsters]="activeMonsters()"
                     [availableMonsters]="availableMonsters()"
-                    (draw)="drawMonster()"
+                    [bagMonsters]="bagMonsters()"
+                    (draw)="drawMonster($event)"
                     (add)="addMonster($event)"
                     (details)="showMonstersDetails()"
                     (monsterKill)="killMonster($event)"

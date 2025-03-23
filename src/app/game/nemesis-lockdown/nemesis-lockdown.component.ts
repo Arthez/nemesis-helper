@@ -188,8 +188,8 @@ export class NemesisLockdownComponent {
         }
     }
 
-    protected drawMonster(): void {
-        const monster: MonsterTokenConfig | undefined = this.monsterBagService.getMonsterEncounterFromBag();
+    protected drawMonster(monsterType: MonsterType | null): void {
+        const monster: MonsterTokenConfig | undefined = this.monsterBagService.getMonsterEncounterFromBag(monsterType);
         if (monster) {
             this.nemesisLockdownLoggerService.logMonsterEncounter(monster);
             this.nemesisLockdownModalService.openMonsterWarning(monster).subscribe(() => {

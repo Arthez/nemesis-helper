@@ -65,11 +65,17 @@ export class MonsterTokensService<MonsterTokenType extends MonsterTokenBase> {
         return this.transferMonster('available', 'bag', monster => monster.type === type);
     }
 
-    public getMonsterEncounterFromBag(): MonsterTokenType | undefined {
+    public getMonsterEncounterFromBag(type: MonsterTokenType['type'] | null): MonsterTokenType | undefined {
         const bagMonsters: MonsterTokenType[] = this.bagMonstersWritable();
         if (bagMonsters.length < 1) {
             return undefined;
         }
+
+        // Not random encounter (monster was manually chosen)
+        if (type !== null) {
+            return this.transferMonster('bag', 'active', monster => monster.type === type);
+        }
+
         const transferIndex: number = 0;
         const encounterToken: MonsterTokenType = bagMonsters[transferIndex];
         if (encounterToken.type === 'BLANK') {

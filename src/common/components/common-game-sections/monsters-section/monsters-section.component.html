@@ -3,7 +3,7 @@
         mat-flat-button
         color="primary"
         appNonFocusable
-        (click)="draw.emit()">
+        [matMenuTriggerFor]="drawMonsterMenu">
         <div class="icon-with-label">
             <span>{{ 'tk.monsters.button.draw' | translate }}</span>
             <mat-icon
@@ -11,6 +11,28 @@
                 class="very-small-icon"></mat-icon>
         </div>
     </button>
+    <mat-menu #drawMonsterMenu="matMenu">
+        <button
+            mat-menu-item
+            (click)="draw.emit(null)">
+            {{ 'tk.monsters.button.draw.random' | translate }}
+        </button>
+        <button
+            mat-menu-item
+            [matMenuTriggerFor]="drawMonsterManuallyMenu">
+            {{ 'tk.monsters.button.draw.manual' | translate }}
+        </button>
+    </mat-menu>
+    <mat-menu #drawMonsterManuallyMenu="matMenu">
+        @for (monsterType of monstersTypes; track monsterType) {
+            <button
+                mat-menu-item
+                [disabled]="!(bagMonsters | monsterAttainable: monsterType)"
+                (click)="draw.emit(monsterType)">
+                {{ monsterType | monsterTypeTk | translate }}
+            </button>
+        }
+    </mat-menu>
     <button
         mat-flat-button
         color="primary"
