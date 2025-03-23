@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MonsterItemComponent } from '@common/components/monsters/monster-item/monster-item.component';
 import { NonFocusableDirective } from '@common/directives/non-focusable.directive';
@@ -23,6 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
         MonsterTypeTkPipe,
         MonsterAttainablePipe,
         NonFocusableDirective,
+        MatIcon,
     ],
     templateUrl: './monsters-section.component.html',
     styleUrl: './monsters-section.component.scss',

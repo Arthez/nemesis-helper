@@ -9,44 +9,25 @@ export class IconRegistryService {
 
     private readonly matIconRegistry: MatIconRegistry = inject(MatIconRegistry);
     private readonly domSanitizer: DomSanitizer = inject(DomSanitizer);
+    private readonly iconsToRegister: { iconName: string; assetPath: string }[] = [
+        { iconName: 'assignment_late', assetPath: 'assets/icons/assignment_late.svg '},
+        { iconName: 'hexagon', assetPath: 'assets/icons/hexagon.svg '},
+        { iconName: 'bag', assetPath: 'assets/icons/bag.svg '},
+        { iconName: 'eye', assetPath: 'assets/icons/eye.svg '},
+        { iconName: 'fire', assetPath: 'assets/icons/fire.svg '},
+        { iconName: 'exit_to_app', assetPath: 'assets/icons/exit_to_app.svg '},
+        { iconName: 'overview', assetPath: 'assets/icons/overview.svg '},
+        { iconName: 'info', assetPath: 'assets/icons/info.svg '},
+        { iconName: 'help', assetPath: 'assets/icons/help.svg '},
+        { iconName: 'quiz', assetPath: 'assets/icons/quiz.svg '},
+        { iconName: 'light_mode', assetPath: 'assets/icons/light_mode.svg '},
+        { iconName: 'dark_mode', assetPath: 'assets/icons/dark_mode.svg '},
+    ];
 
     public initIcons(): void {
-        this.matIconRegistry.addSvgIcon(
-            'assignment_late',
-            this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/assignment_late.svg'),
-        );
-        this.matIconRegistry.addSvgIcon(
-            'hexagon',
-            this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/hexagon.svg'),
-        );
-        this.matIconRegistry.addSvgIcon(
-            'exit_to_app',
-            this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/exit_to_app.svg'),
-        );
-        this.matIconRegistry.addSvgIcon(
-            'overview',
-            this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/overview.svg'),
-        );
-        this.matIconRegistry.addSvgIcon(
-            'info',
-            this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/info.svg'),
-        );
-        this.matIconRegistry.addSvgIcon(
-            'help',
-            this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/help.svg'),
-        );
-        this.matIconRegistry.addSvgIcon(
-            'quiz',
-            this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/quiz.svg'),
-        );
-        this.matIconRegistry.addSvgIcon(
-            'light_mode',
-            this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/light_mode.svg'),
-        );
-        this.matIconRegistry.addSvgIcon(
-            'dark_mode',
-            this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/dark_mode.svg'),
-        );
+        this.iconsToRegister.forEach(iconData => {
+            this.matIconRegistry.addSvgIcon(iconData.iconName, this.domSanitizer.bypassSecurityTrustResourceUrl(iconData.assetPath));
+        });
     }
 
 }

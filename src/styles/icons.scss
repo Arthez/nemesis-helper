@@ -1,6 +1,14 @@
+$very-small-icon-size: 20px;
 $small-icon-size: 28px;
 
 mat-icon {
+    &.very-small-icon {
+        margin: 0 !important;
+        width: $very-small-icon-size !important;
+        height: $very-small-icon-size !important;
+        font-size: $very-small-icon-size !important;
+    }
+
     &.small-icon {
         margin: 0 !important;
         width: $small-icon-size !important;

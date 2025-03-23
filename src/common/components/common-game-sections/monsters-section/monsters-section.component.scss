@@ -12,7 +12,14 @@
 
         button {
             flex: 1;
-            min-width: 100px;
+            min-width: 140px;
+
+            .icon-with-label {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: var(--sizing-5);
+            }
         }
     }
 

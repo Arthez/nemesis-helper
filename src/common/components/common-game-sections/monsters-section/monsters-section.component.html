@@ -4,14 +4,24 @@
         color="primary"
         appNonFocusable
         (click)="draw.emit()">
-        {{ 'tk.monsters.button.draw' | translate }}
+        <div class="icon-with-label">
+            <span>{{ 'tk.monsters.button.draw' | translate }}</span>
+            <mat-icon
+                svgIcon="fire"
+                class="very-small-icon"></mat-icon>
+        </div>
     </button>
     <button
         mat-flat-button
         color="primary"
         appNonFocusable
         [matMenuTriggerFor]="addMonsterMenu">
-        {{ 'tk.monsters.button.add' | translate }}
+        <div class="icon-with-label">
+            <span>{{ 'tk.monsters.button.add' | translate }}</span>
+            <mat-icon
+                svgIcon="bag"
+                class="very-small-icon"></mat-icon>
+        </div>
     </button>
     <mat-menu #addMonsterMenu="matMenu">
         @for (monsterType of monstersTypes; track monsterType) {
@@ -28,7 +38,12 @@
         color="primary"
         appNonFocusable
         (click)="details.emit()">
-        {{ 'tk.monsters.button.details' | translate }}
+        <div class="icon-with-label">
+            <span>{{ 'tk.monsters.button.details' | translate }}</span>
+            <mat-icon
+                svgIcon="eye"
+                class="very-small-icon"></mat-icon>
+        </div>
     </button>
 </div>
 <div class="monsters">
