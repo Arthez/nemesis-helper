@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, Signal, signal, WritableSignal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { LogItem } from '@common/classes/logger.class';
 import { MonstersSectionComponent } from '@common/components/common-game-sections/monsters-section/monsters-section.component';
@@ -31,7 +32,7 @@ import { defaultMonsterBagConfig, getMonsterTokensConfig, MonsterTokenConfig } f
 import { getPhasesConfig, Stage, stagesSummaryConfig } from '@configs/nld-specific/phases.config';
 import { PowerSupplyState } from '@configs/nld-specific/power-supply.config';
 import { getRoundConfigs, RoundTrackerEvent } from '@configs/nld-specific/round.config';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { NemesisLockdownLoggerService } from './nemesis-lockdown-logger.service';
 import { NemesisLockdownModalService } from './nemesis-lockdown-modal.service';
@@ -74,6 +75,8 @@ export class NemesisLockdownComponent {
     protected readonly nemesisLockdownModalService: NemesisLockdownModalService = inject(NemesisLockdownModalService);
     protected readonly nemesisLockdownLoggerService: NemesisLockdownLoggerService = inject(NemesisLockdownLoggerService);
     protected readonly monsterBagService: MonsterTokensService<MonsterTokenConfig> = inject(MonsterTokensService);
+    protected readonly translateService: TranslateService = inject(TranslateService);
+    protected readonly matSnackBar: MatSnackBar = inject(MatSnackBar);
     protected readonly router: Router = inject(Router);
     protected readonly gameId: GameKey = inject(GAME_ID);
 
@@ -167,8 +170,7 @@ export class NemesisLockdownComponent {
         this.activeStage.set(stage);
         switch (stage) {
             case 'draw_cards': {
-                this.saveGameState();
-                this.saveLogs();
+                this.saveGame();
                 break;
             }
             case 'launch_css': {
@@ -259,6 +261,14 @@ export class NemesisLockdownComponent {
 
     protected openLogsModal(): void {
         this.nemesisLockdownModalService.openLogs(this.nemesisLockdownLoggerService.logs());
+    }
+
+    protected openReloadGameModal(): void {
+        this.nemesisLockdownModalService.openReload(this.nemesisLockdownLoggerService.logs()).subscribe(result => {
+            if (result) {
+                window.location.reload();
+            }
+        });
     }
 
     protected goToLandingPage(): void {
@@ -383,6 +393,7 @@ export class NemesisLockdownComponent {
 
     private saveGameState(): void {
         StorageManager.saveGameState<NemesisLockdownState>(this.gameId, {
+            dateIso: (new Date()).toISOString(),
             rounds: this.rounds(),
             endRoundNum: this.endRoundNum(),
             activeRoundNum: this.activeRoundNum(),
@@ -408,6 +419,16 @@ export class NemesisLockdownComponent {
 
     private loadLogs(): LogItem[] {
         return StorageManager.loadGameLogs(this.gameId) || [];
+    }
+
+    private notifyAboutSave(): void {
+        this.matSnackBar.open(this.translateService.instant('tk.notification.game-saved'), undefined, { duration: 3000 });
+    }
+
+    private saveGame(): void {
+        this.saveGameState();
+        this.saveLogs();
+        this.notifyAboutSave();
     }
 
 }

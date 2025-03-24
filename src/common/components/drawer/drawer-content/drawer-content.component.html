@@ -17,7 +17,7 @@
                 (click)="changeUiMode()">
                 <mat-icon
                     [svgIcon]="uiModeService.isDarkMode() ? 'dark_mode' : 'light_mode'"
-                    class="small-icon"></mat-icon>
+                    class="medium-icon"></mat-icon>
             </button>
         </div>
         @if (openSearchRoomModal.observed) {
@@ -29,7 +29,7 @@
                 (click)="openSearchRoomModal.emit()">
                 <mat-icon
                     svgIcon="hexagon"
-                    class="small-icon"></mat-icon>
+                    class="medium-icon"></mat-icon>
             </button>
         }
         @if (openFaqModal.observed) {
@@ -41,7 +41,7 @@
                 (click)="openFaqModal.emit()">
                 <mat-icon
                     svgIcon="quiz"
-                    class="small-icon"></mat-icon>
+                    class="medium-icon"></mat-icon>
             </button>
         }
         @if (openKeyMomentsModal.observed) {
@@ -53,7 +53,7 @@
                 (click)="openKeyMomentsModal.emit()">
                 <mat-icon
                     svgIcon="assignment_late"
-                    class="small-icon"></mat-icon>
+                    class="medium-icon"></mat-icon>
             </button>
         }
         @if (openLogsModal.observed) {
@@ -65,11 +65,23 @@
                 (click)="openLogsModal.emit()">
                 <mat-icon
                     svgIcon="overview"
-                    class="small-icon"></mat-icon>
+                    class="medium-icon"></mat-icon>
             </button>
         }
     </div>
     <div class="bottom">
+        @if (openReloadModal.observed) {
+            <button
+                mat-button
+                color="primary"
+                [matTooltip]="'tk.drawer.tooltip.reload' | translate"
+                [matTooltipShowDelay]="tooltipShowDelay"
+                (click)="openReloadModal.emit()">
+                <mat-icon
+                    svgIcon="save"
+                    class="medium-icon"></mat-icon>
+            </button>
+        }
         <button
             mat-button
             color="primary"
@@ -78,7 +90,7 @@
             (click)="openAboutModal()">
             <mat-icon
                 svgIcon="help"
-                class="small-icon"></mat-icon>
+                class="medium-icon"></mat-icon>
         </button>
         @if (goToLandingPage.observed) {
             <button
@@ -89,7 +101,7 @@
                 (click)="goToLandingPage.emit()">
                 <mat-icon
                     svgIcon="exit_to_app"
-                    class="small-icon"></mat-icon>
+                    class="medium-icon"></mat-icon>
             </button>
         }
     </div>

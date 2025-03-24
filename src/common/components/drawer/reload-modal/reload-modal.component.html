@@ -1,0 +1,45 @@
+<div class="modal-wrapper">
+    <div class="modal-header">{{ 'tk.reload-modal.title' | translate }}</div>
+    <div class="modal-content">
+        <div class="info">
+            @if (saveGameLog) {
+                <div>{{ 'tk.reload-modal.label.info' | translate: { time: (saveGameLog.dateIso | date: 'HH:mm:ss'), round: saveGameLog.roundNum } }}</div>
+                <div class="important">{{ 'tk.reload-modal.label.cannot-revert' | translate }}</div>
+                <div>{{ 'tk.reload-modal.label.revert' | translate }}</div>
+                <div class="logs">
+                    @for (logItem of logs; track logItem.dateIso) {
+                        <div
+                            class="log-item"
+                            [ngClass]="logItem.type">
+                            <span class="date">[{{ logItem.dateIso | date: 'HH:mm:ss' }}]</span>
+                            <span class="round-num">({{ logItem.roundNum }}):</span>
+                            <span class="text"> {{ logItem.text }}</span>
+                        </div>
+                    } @empty {
+                        <div class="empty-logs font-16">
+                            <span>{{ 'tk.reload-modal.label.empty-logs' | translate }}</span>
+                        </div>
+                    }
+                </div>
+            } @else {
+                <div>{{ 'tk.reload-modal.label.no-save' | translate }}</div>
+            }
+        </div>
+    </div>
+    <div class="modal-actions">
+        <button
+            mat-stroked-button
+            color="primary"
+            appNonFocusable
+            (click)="closeModal(false)">
+            {{ 'tk.general.label.button.cancel' | translate }}
+        </button>
+        <button
+            mat-flat-button
+            color="primary"
+            appNonFocusable
+            (click)="closeModal(true)">
+            {{ 'tk.general.label.button.load' | translate }}
+        </button>
+    </div>
+</div>

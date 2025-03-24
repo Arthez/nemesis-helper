@@ -28,6 +28,7 @@ export class DrawerContentComponent {
     @Output() protected readonly openSearchRoomModal: EventEmitter<void> = new EventEmitter<void>();
     @Output() protected readonly openFaqModal: EventEmitter<void> = new EventEmitter<void>();
     @Output() protected readonly openKeyMomentsModal: EventEmitter<void> = new EventEmitter<void>();
+    @Output() protected readonly openReloadModal: EventEmitter<void> = new EventEmitter<void>();
     @Output() protected readonly openLogsModal: EventEmitter<void> = new EventEmitter<void>();
     @Output() protected readonly goToLandingPage: EventEmitter<void> = new EventEmitter<void>();
     // eslint-disable-next-line no-magic-numbers
@@ -62,4 +63,5 @@ export class DrawerContentComponent {
             panelClass: 'medium-modal',
         });
     }
+
 }

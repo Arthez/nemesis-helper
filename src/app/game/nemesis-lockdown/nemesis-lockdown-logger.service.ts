@@ -1,5 +1,5 @@
 import { Injectable, Signal } from '@angular/core';
-import { Logger, LogItem } from '@common/classes/logger.class';
+import { gameSavedLogText, Logger, LogItem } from '@common/classes/logger.class';
 import { CssMoveEvent } from '@common/components/nld-specific/nld-round-tracker-section/nld-round-tracker-section.component';
 import { Autodestruction } from '@common/interfaces/autodestruction.interface';
 import { MonsterDevelopmentResult } from '@common/interfaces/monster-development-result.interface';
@@ -76,7 +76,7 @@ export class NemesisLockdownLoggerService {
     }
 
     public logSaveGameState(): void {
-        this.logger.addRecord('GAME SAVED!', 'event');
+        this.logger.addRecord(gameSavedLogText, 'event');
     }
 
     public logAutodestructionStateInevitable(): void {

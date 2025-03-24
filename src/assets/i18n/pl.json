@@ -11,6 +11,7 @@
     "tk.general.label.button.continue": "Kontynuuj",
     "tk.general.label.button.close": "Zamknij",
     "tk.general.label.button.finish": "Zakończ",
+    "tk.general.label.button.load": "Załaduj",
 
     "tk.drawer.tooltip.change-language": "Zmień język",
     "tk.drawer.tooltip.change-ui-mode": "Zmień motyw UI",
@@ -18,8 +19,11 @@
     "tk.drawer.tooltip.faq": "Pokaż FAQ",
     "tk.drawer.tooltip.key-moments": "Pokaż momenty przełomowe",
     "tk.drawer.tooltip.game-logs": "Pokaż logi rozgrywki",
+    "tk.drawer.tooltip.reload": "Załaduj ostatni stan gry",
     "tk.drawer.tooltip.about": "O aplikacji",
     "tk.drawer.tooltip.new-game": "Zacznij nową grę",
+
+    "tk.notification.game-saved": "Gra została zapisana!",
 
     "tk.config.label.game-mode.semi-co-op": "Semi co-op",
     "tk.config.label.game-mode.full-co-op": "Pełny co-op",
@@ -72,7 +76,7 @@
 
     "tk.nog.config.label.phase1": "Faza graczy",
     "tk.nog.config.label.phase2": "Faza wydarzeń",
-    "tk.nog.config.label.phase1.stage1.draw-cards": "Dobierzcie karty akcji",
+    "tk.nog.config.label.phase1.stage1.draw-cards": "Dobierzcie karty akcji (auto-zapis gry)",
     "tk.nog.config.label.phase1.stage1.content": "<div class=\"description\">\n    <div class=\"p bold\">Na początku każdej fazy graczy wszyscy gracze dobierają karty ze swojego stosu tak, aby mieć na ręce 5 kart.</div>\n    <div class=\"p\">Jeśli w jakimś momencie gry masz dobrać kartę na rękę, a Twój stos kart akcji jest pusty, potasuj karty odrzucone i uformuj z nich nowy stos. Następnie dobierz wymaganą liczbę kart.</div>\n</div>",
     "tk.nog.config.label.phase1.stage2.first-player-transfer": "Znacznik pierwszego gracza",
     "tk.nog.config.label.phase1.stage2.content": "<div class=\"description\">\n    <div class=\"p bold\">Po tym, jak wszyscy gracze dobiorą karty akcji, gracz posiadający znacznik pierwszego gracza przekazuje go graczowi siedzącemu po jego lewej stronie.</div>\n    <div class=\"p note\">Uwaga! W pierwszej rundzie gry nie przekazujecie znacznika pierwszego gracza.</div>\n    <div class=\"p\">Za każdym razem, gdy gracze są zobowiązani do wykonania jakichś czynności w kolejności rozgrywania, rozpoczyna gracz ze znacznikiem pierwszego gracza, a następnie obowiązuje kolejność zgodna z kierunkiem ruchu wskazówek zegara.</div>\n</div>",
@@ -92,7 +96,7 @@
     "tk.nog.config.label.phase2.stage9.content": "<div class=\"description\">\n    <div class=\"p bold\">Dobierzcie 1 żeton intruza z woreczka.</div>\n    <div class=\"p\">Efekt zależy od dobranego żetonu:</div>\n    <div class=\"p\"><b>LARWA</b> – usuńcie ten żeton z woreczka i dołóżcie do kolonii 1 żeton dorosłego osobnika.</div>\n    <div class=\"p\"><b>PEŁZACZ</b> – usuńcie ten żeton z woreczka i dołóżcie do kolonii 1 żeton reproduktora.</div>\n    <div class=\"p\"><b>DOROSŁY OSOBNIK</b> – wszyscy gracze w kolejności rozgrywania wykonują <b>rzut na szmery</b>. Jeśli postać gracza jest zaangażowana w walkę z intruzem, gracz nie wykonuje rzutu na szmery. Włóżcie żeton dorosłego osobnika z powrotem do woreczka.</div>\n    <div class=\"p more\">Więcej o rzucie na szmery – zob. str. 15.</div>\n    <div class=\"p\"><b>REPRODUKTOR</b> – wszyscy gracze w kolejności rozgrywania wykonują rzut na szmery. Jeśli postać gracza jest zaangażowana w walkę z intruzem, gracz nie wykonuje <b>rzutu na szmery</b>. Włóżcie żeton reproduktora z powrotem do woreczka.</div>\n    <div class=\"p\"><b>KRÓLOWA</b> – jeśli w Gnieździe są jakieś postacie, umieśćcie figurkę królowej w Gnieździe i rozegrajcie spotkanie.</div>\n    <div class=\"p more\">Więcej o spotkaniu z intruzem – zob. str. 18.</div>\n    <div class=\"p\">Jeśli w Gnieździe nie ma żadnych postaci (albo jego lokalizacja nie została jeszcze odkryta), dodajcie kolejne jajo na planszę intruzów. Włóżcie żeton królowej z powrotem do woreczka.</div>\n    <div class=\"p\"><b>PUSTY ŻETON</b> – dołóżcie 1 żeton dorosłego osobnika do woreczka. Jeśli nie ma już dostępnych żetonów dorosłych osobników, nic się nie dzieje. Włóżcie pusty żeton z powrotem do woreczka.</div>\n</div>",
     "tk.nld.config.label.phase1": "Faza graczy",
     "tk.nld.config.label.phase2": "Faza wydarzeń",
-    "tk.nld.config.label.phase1.stage1.draw-cards": "Dobranie kart akcji",
+    "tk.nld.config.label.phase1.stage1.draw-cards": "Dobranie kart akcji (auto-zapis gry)",
     "tk.nld.config.label.phase1.stage1.content": "<div class=\"description\">\n    <div class=\"p bold\">Na początku każdej fazy graczy wszyscy gracze dobierają karty ze swojego stosu kart akcji, tak aby mieć na ręce 5 kart.</div>\n    <div class=\"p\">Jeśli w jakimś momencie gry masz dobrać kartę na rękę, a Twój stos kart akcji się wyczerpie, potasuj karty odrzucone i uformuj z nich nowy stos. Następnie dobierz wymaganą liczbę kart.</div>\n</div>",
     "tk.nld.config.label.phase1.stage2.first-player-transfer": "Żeton pierwszego gracza",
     "tk.nld.config.label.phase1.stage2.content": "<div class=\"description\">\n    <div class=\"p bold\">Po tym, jak wszyscy gracze dobiorą karty akcji, gracz posiadający żeton pierwszego gracza przekazuje go graczowi siedzącemu po jego lewej stronie.</div>\n    <div class=\"p note\">Uwaga! W pierwszej rundzie gry nie przekazujecie żetonu pierwszego gracza.</div>\n    <div class=\"p\">Za każdym razem, gdy gracze są zobowiązani do wykonania jakichś czynności w kolejności rozgrywania, rozpoczyna gracz z żetonem pierwszego gracza, a następnie obowiązuje kolejność zgodna z kierunkiem ruchu wskazówek zegara.</div>\n</div>",
@@ -511,6 +515,13 @@
     "tk.logs-modal.filter.tracker-type": "Akcje toru czasu",
     "tk.nog.logs-modal.filter.monster-type": "Zdarzenia Intruzów",
     "tk.nld.logs-modal.filter.monster-type": "Zdarzenia Nocnych łowców",
+
+    "tk.reload-modal.title": "Załaduj poprzedni stan gry",
+    "tk.reload-modal.label.info": "Chcesz załadować poprzedni stan gry z {{time}} (początek rundy na pozycji toru czasu {{round}})?",
+    "tk.reload-modal.label.revert": "Następujące wydarzenia zostaną cofnięte:",
+    "tk.reload-modal.label.empty-logs": "Brak wydarzeń (gra została zapisana bez żadnych dalszych wydarzeń)",
+    "tk.reload-modal.label.no-save": "Nic nie zostało jeszcze zapisane",
+    "tk.reload-modal.label.cannot-revert": "Ta akcja nie może być cofnięta!",
 
     "tk.about-modal.title": "O aplikacji (v{{appVer}})",
     "tk.about-modal.label.developer": "Deweloper aplikacji",

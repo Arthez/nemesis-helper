@@ -6,6 +6,7 @@ import { Stage } from '@configs/nld-specific/phases.config';
 import { PowerSupplyState } from '@configs/nld-specific/power-supply.config';
 
 export interface NemesisLockdownState {
+    dateIso: string;
     rounds: NldRoundItem[];
     endRoundNum: number;
     activeRoundNum: number;

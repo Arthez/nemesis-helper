@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, Signal, signal, WritableSignal } from '@angular/core';
 import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LogItem } from '@common/classes/logger.class';
 import { MonstersSectionComponent } from '@common/components/common-game-sections/monsters-section/monsters-section.component';
@@ -28,6 +29,7 @@ import { GameKey, GameSetupDataOriginal } from '@configs/games.config';
 import { defaultMonsterBagConfig, getMonsterTokensConfig, MonsterTokenConfig } from '@configs/nog-specific/monster-token.config';
 import { getPhasesConfig, Stage, stagesSummaryConfig } from '@configs/nog-specific/phases.config';
 import { getRoundConfigs, RoundTrackerEvent } from '@configs/nog-specific/round.config';
+import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { NemesisOriginalLoggerService } from './nemesis-original-logger.service';
 import { NemesisOriginalModalService } from './nemesis-original-modal.service';
@@ -67,6 +69,8 @@ export class NemesisOriginalComponent {
     protected readonly nemesisOriginalModalService: NemesisOriginalModalService = inject(NemesisOriginalModalService);
     protected readonly nemesisOriginalLoggerService: NemesisOriginalLoggerService = inject(NemesisOriginalLoggerService);
     protected readonly monsterBagService: MonsterTokensService<MonsterTokenConfig> = inject(MonsterTokensService);
+    protected readonly translateService: TranslateService = inject(TranslateService);
+    protected readonly matSnackBar: MatSnackBar = inject(MatSnackBar);
     protected readonly router: Router = inject(Router);
     protected readonly gameId: GameKey = inject(GAME_ID);
 
@@ -132,8 +136,7 @@ export class NemesisOriginalComponent {
         this.activeStage.set(stage);
         switch (stage) {
             case 'draw_cards': {
-                this.saveGameState();
-                this.saveLogs();
+                this.saveGame();
                 break;
             }
             case 'round_tracker_update': {
@@ -221,6 +224,14 @@ export class NemesisOriginalComponent {
         this.nemesisOriginalModalService.openLogs(this.nemesisOriginalLoggerService.logs());
     }
 
+    protected openReloadGameModal(): void {
+        this.nemesisOriginalModalService.openReload(this.nemesisOriginalLoggerService.logs()).subscribe(result => {
+            if (result) {
+                window.location.reload();
+            }
+        });
+    }
+
     protected goToLandingPage(): void {
         this.router.navigate(['/']);
     }
@@ -300,6 +311,7 @@ export class NemesisOriginalComponent {
 
     private saveGameState(): void {
         StorageManager.saveGameState<NemesisOriginalState>(this.gameId, {
+            dateIso: (new Date()).toISOString(),
             rounds: this.rounds(),
             endRoundNum: this.endRoundNum(),
             activeRoundNum: this.activeRoundNum(),
@@ -323,6 +335,16 @@ export class NemesisOriginalComponent {
 
     private loadLogs(): LogItem[] {
         return StorageManager.loadGameLogs(this.gameId) || [];
+    }
+
+    private notifyAboutSave(): void {
+        this.matSnackBar.open(this.translateService.instant('tk.notification.game-saved'), undefined, { duration: 3000 });
+    }
+
+    private saveGame(): void {
+        this.saveGameState();
+        this.saveLogs();
+        this.notifyAboutSave();
     }
 
 }

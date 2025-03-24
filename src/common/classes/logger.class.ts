@@ -7,6 +7,8 @@ export interface LogItem {
     roundNum: string;
 }
 
+export const gameSavedLogText: string = 'GAME SAVED!';
+
 export class Logger {
 
     public readonly logs: Signal<LogItem[]>;
