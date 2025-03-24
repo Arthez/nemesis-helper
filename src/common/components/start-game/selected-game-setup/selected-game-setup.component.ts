@@ -22,6 +22,7 @@ interface GameSetupForm {
     players: FormArray<FormControl<string>>;
     gameMode: FormControl<GameMode>;
     timerEnabled: FormControl<boolean>;
+    monstersDisabled: FormControl<boolean>;
     randomizePlayerNum: FormControl<boolean>;
 }
 
@@ -64,6 +65,7 @@ export class SelectedGameSetupComponent implements OnInit, OnDestroy {
         gameMode: new FormControl<GameMode>(GameMode.SEMI_COOP, { nonNullable: true }),
         randomizePlayerNum: new FormControl<boolean>(true, { nonNullable: true }),
         timerEnabled: new FormControl<boolean>(false, { nonNullable: true }),
+        monstersDisabled: new FormControl<boolean>(false, { nonNullable: true }),
     });
     private readonly subSink: Subscription = new Subscription();
 
@@ -101,6 +103,7 @@ export class SelectedGameSetupComponent implements OnInit, OnDestroy {
             players: this.generatePlayersData(players, formValue.randomizePlayerNum),
             gameMode: formValue.gameMode,
             timerEnabled: formValue.timerEnabled,
+            monstersDisabled: formValue.monstersDisabled,
             createdDate: (new Date()).toISOString(),
         };
         switch (gameId) {

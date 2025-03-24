@@ -3,20 +3,21 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: var(--sizing-40);
+    gap: var(--sizing-30);
     min-width: 220px;
 
     .players {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--sizing-40);
+        gap: var(--sizing-30);
         justify-content: center;
         max-width: 800px;
         padding: 0 var(--sizing-40);
     }
 
     .randomize-players,
-    .timer {
+    .timer,
+    .monsters {
         display: flex;
         gap: var(--sizing-10);
     }

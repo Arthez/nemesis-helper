@@ -52,6 +52,7 @@ interface GameSetupDataBase {
     players: Player[];
     gameMode: GameMode;
     timerEnabled: boolean;
+    monstersDisabled: boolean;
     createdDate: IsoDateString;
 }
 

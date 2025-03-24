@@ -44,19 +44,21 @@
             <app-section-wrapper label="tk.game-section.label.step-description">
                 <app-summary-section [summary]="summaryData()"></app-summary-section>
             </app-section-wrapper>
-            <app-section-wrapper
-                label="tk.nog.game-section.label.monsters"
-                class="monsters">
-                <app-monsters-section
-                    [activeMonsters]="activeMonsters()"
-                    [availableMonsters]="availableMonsters()"
-                    [bagMonsters]="bagMonsters()"
-                    (draw)="drawMonster($event)"
-                    (add)="addMonster($event)"
-                    (details)="showMonstersDetails()"
-                    (monsterKill)="killMonster($event)"
-                    (monsterRetreat)="retreatMonster($event)"></app-monsters-section>
-            </app-section-wrapper>
+            @if (monstersEnabled) {
+                <app-section-wrapper
+                    label="tk.nog.game-section.label.monsters"
+                    class="monsters">
+                    <app-monsters-section
+                        [activeMonsters]="activeMonsters()"
+                        [availableMonsters]="availableMonsters()"
+                        [bagMonsters]="bagMonsters()"
+                        (draw)="drawMonster($event)"
+                        (add)="addMonster($event)"
+                        (details)="showMonstersDetails()"
+                        (monsterKill)="killMonster($event)"
+                        (monsterRetreat)="retreatMonster($event)"></app-monsters-section>
+                </app-section-wrapper>
+            }
         </div>
     </div>
 </mat-drawer-container>

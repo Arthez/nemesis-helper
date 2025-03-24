@@ -77,6 +77,7 @@ export class NemesisOriginalComponent {
     protected readonly hibernationChambersOpeningRoundNum: number = hibernationChambersOpeningRoundNum;
     protected readonly gameSetupData: GameSetupDataOriginal | undefined = StorageManager.loadGameSetupData(this.gameId);
     protected readonly stateData: NemesisOriginalState | undefined = this.loadGameState();
+    protected readonly monstersEnabled: boolean = !this.gameSetupData?.monstersDisabled;
     protected readonly phasesConfig: WritableSignal<PhaseConfig<Stage>[]> = signal(getPhasesConfig());
     protected readonly rounds: WritableSignal<NogRoundItem[]> = signal(this.stateData?.rounds || this.getInitialRounds());
     protected readonly endRoundNum: WritableSignal<number> = signal(
@@ -144,7 +145,9 @@ export class NemesisOriginalComponent {
                 break;
             }
             case 'monster_development': {
-                this.triggerMonsterDevelopment();
+                if (this.monstersEnabled) {
+                    this.triggerMonsterDevelopment();
+                }
                 break;
             }
             default:
@@ -158,8 +161,7 @@ export class NemesisOriginalComponent {
             this.nemesisOriginalLoggerService.logMonsterEncounter(monster);
             this.nemesisOriginalModalService.openMonsterWarning(monster).subscribe(() => {
                 if (monster.type !== MonsterType.BLANK && !this.monsterEncounterHappenedRoundNum) {
-                    this.monsterEncounterHappenedRoundNum = this.activeRoundNum();
-                    this.nemesisOriginalModalService.openFirstEncounterWarning();
+                    this.handleFirstMonsterEncounter();
                 }
             });
         }
@@ -193,6 +195,11 @@ export class NemesisOriginalComponent {
             this.nemesisOriginalLoggerService.logMonsterRetreat(monster);
             this.monsterBagService.putMonsterBackToBag(monster.id);
         });
+    }
+
+    protected handleFirstMonsterEncounter(): void {
+        this.monsterEncounterHappenedRoundNum = this.activeRoundNum();
+        this.nemesisOriginalModalService.openFirstEncounterWarning();
     }
 
     protected showGameEndModal(): void {
