@@ -14,6 +14,14 @@
         <span>{{ 'tk.round.button.actions' | translate }}</span>
     </button>
     <mat-menu #tokenMenu="matMenu">
+        @if (enableMonsterEncounterAction) {
+            <button
+                mat-menu-item
+                [disabled]="monsterEncounterHappenedRoundNum !== undefined"
+                (click)="monsterEncounter.emit()">
+                {{ 'tk.nog.round.label.event.first-encounter' | translate }}
+            </button>
+        }
         @if (autodestruction) {
             <button
                 mat-menu-item

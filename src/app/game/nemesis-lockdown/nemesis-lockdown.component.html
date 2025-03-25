@@ -33,6 +33,9 @@
                     [autodestruction]="autodestruction()"
                     [alertProcedureActivatedRoundNum]="alertProcedureActivatedRoundNum()"
                     [isolationRoomOpeningRoundNum]="isolationRoomOpeningRoundNum"
+                    [enableMonsterEncounterAction]="!monstersEnabled"
+                    [monsterEncounterHappenedRoundNum]="monsterEncounterHappenedRoundNum"
+                    (monsterEncounter)="handleFirstMonsterEncounter()"
                     (cssMoveEvent)="onCssMoveEvent($event)"
                     (roundTrackerEvent)="onRoundTrackerEvent($event)">
                 </app-nld-round-tracker-section>

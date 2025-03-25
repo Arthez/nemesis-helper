@@ -30,8 +30,11 @@ export class NogRoundTrackerSectionComponent {
     @Input({ required: true }) public endRoundNum: number = 0;
     @Input({ required: true }) public autodestruction: Autodestruction | undefined;
     @Input({ required: true }) public hibernationRoundNum: number = 0;
+    @Input({ required: false }) public enableMonsterEncounterAction: boolean = false;
+    @Input({ required: false }) public monsterEncounterHappenedRoundNum: number | undefined;
 
     @Output() public roundTrackerEvent: EventEmitter<RoundTrackerEvent> = new EventEmitter<RoundTrackerEvent>();
+    @Output() public monsterEncounter: EventEmitter<void> = new EventEmitter<void>();
 
     private readonly modalService: ModalService = inject(ModalService);
 

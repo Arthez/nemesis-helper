@@ -15,6 +15,9 @@ import {
     CssMoveEvent,
     NldRoundTrackerSectionComponent,
 } from '@common/components/nld-specific/nld-round-tracker-section/nld-round-tracker-section.component';
+import {
+    NogRoundTrackerSectionComponent,
+} from '@common/components/nog-specific/nog-round-tracker-section/nog-round-tracker-section.component';
 import { MonsterType } from '@common/enums/monster-types.enum';
 import { Autodestruction } from '@common/interfaces/autodestruction.interface';
 import { ContentItem } from '@common/interfaces/content-item.interface';
@@ -57,6 +60,7 @@ const isolationRoomOpeningRoundNum: number = 8;
         MatDrawerContainer,
         MatDrawer,
         MatButton,
+        NogRoundTrackerSectionComponent,
     ],
     providers: [
         NemesisLockdownModalService,
@@ -102,7 +106,7 @@ export class NemesisLockdownComponent {
         numberOrFallback(this.stateData?.alertProcedureActivatedRoundNum, undefined),
     );
     protected readonly summaryData: Signal<ContentItem> = computed(() => stagesSummaryConfig[this.activeStage()]);
-    private monsterEncounterHappenedRoundNum: number | undefined = this.stateData?.monsterEncounterHappenedRoundNum;
+    protected monsterEncounterHappenedRoundNum: number | undefined = this.stateData?.monsterEncounterHappenedRoundNum;
 
     public constructor() {
         if (this.stateData) {

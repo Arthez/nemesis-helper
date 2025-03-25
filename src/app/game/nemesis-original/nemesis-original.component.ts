@@ -92,7 +92,7 @@ export class NemesisOriginalComponent {
     protected readonly bagMonsters: Signal<MonsterTokenConfig[]> = this.monsterBagService.bagMonsters;
     protected readonly autodestruction: WritableSignal<Autodestruction | undefined> = signal(this.stateData?.autodestruction || undefined);
     protected readonly summaryData: Signal<ContentItem> = computed(() => stagesSummaryConfig[this.activeStage()]);
-    private monsterEncounterHappenedRoundNum: number | undefined = this.stateData?.monsterEncounterHappenedRoundNum;
+    protected monsterEncounterHappenedRoundNum: number | undefined = this.stateData?.monsterEncounterHappenedRoundNum;
 
     public constructor() {
         if (this.stateData) {

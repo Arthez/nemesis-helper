@@ -42,9 +42,12 @@ export class NldRoundTrackerSectionComponent {
     @Input({ required: true }) public autodestruction: Autodestruction | undefined;
     @Input({ required: true }) public alertProcedureActivatedRoundNum: number | undefined;
     @Input({ required: true }) public isolationRoomOpeningRoundNum: number = 0;
+    @Input({ required: true }) public enableMonsterEncounterAction: boolean = false;
+    @Input({ required: false }) public monsterEncounterHappenedRoundNum: number | undefined;
 
     @Output() public roundTrackerEvent: EventEmitter<RoundTrackerEvent> = new EventEmitter<RoundTrackerEvent>();
     @Output() public cssMoveEvent: EventEmitter<CssMoveEvent> = new EventEmitter<CssMoveEvent>();
+    @Output() public monsterEncounter: EventEmitter<void> = new EventEmitter<void>();
 
     protected readonly allowedStages: Stage[] = ['draw_cards', 'first_player_transfer', 'player_actions'];
     private readonly modalService: ModalService = inject(ModalService);
