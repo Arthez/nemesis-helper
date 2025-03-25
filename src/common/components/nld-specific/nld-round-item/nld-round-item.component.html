@@ -5,7 +5,9 @@
         </div>
     }
     @if (monsterEncounterHappenedRoundNum === roundConfig.num) {
-        <div class="first-encounter">
+        <div
+            class="first-encounter"
+            [class.first]="roundConfig.num === 15">
             <mat-icon svgIcon="swords"></mat-icon>
         </div>
     }

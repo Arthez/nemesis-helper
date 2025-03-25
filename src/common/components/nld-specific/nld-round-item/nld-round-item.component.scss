@@ -38,6 +38,10 @@ $css-padding: calc(($round-item-size - $css-size) / 2);
         left: 25px;
         bottom: -30px;
         color: var(--monster-first-encounter-icon-color);
+
+        &.first {
+            left: 10px;
+        }
     }
 
     .round-slot {
