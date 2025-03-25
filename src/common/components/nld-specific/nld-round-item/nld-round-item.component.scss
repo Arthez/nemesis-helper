@@ -30,6 +30,20 @@ $css-padding: calc(($round-item-size - $css-size) / 2);
         }
     }
 
+    .first-encounter {
+        position: relative;
+        width: 0;
+        height: 0;
+        z-index: 5;
+        left: 25px;
+        bottom: -30px;
+        color: var(--monster-first-encounter-icon-color);
+
+        &.first {
+            left: 10px;
+        }
+    }
+
     .round-slot {
         display: flex;
         justify-content: center;

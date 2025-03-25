@@ -1,5 +1,5 @@
 import { Environment } from './environment.interface';
 
 export const environment: Environment = {
-    appVer: '1.1',
+    appVer: '1.2',
 };

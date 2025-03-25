@@ -38,6 +38,14 @@
             </mat-checkbox>
             <app-info-tooltip textKey="tk.selected-game-setup.tooltip.enable-timer"></app-info-tooltip>
         </div>
+        <div class="monsters">
+            <mat-checkbox
+                [formControl]="form.controls.monstersDisabled"
+                color="primary">
+                {{ (selectedGame.config.id === 'nemesisOriginal' ? 'tk.nog.selected-game-setup.label.disable-monsters' : 'tk.nld.selected-game-setup.label.disable-monsters') | translate }}
+            </mat-checkbox>
+            <app-info-tooltip [textKey]="selectedGame.config.id === 'nemesisOriginal' ? 'tk.nog.selected-game-setup.tooltip.disable-monsters' : 'tk.nld.selected-game-setup.tooltip.disable-monsters'"></app-info-tooltip>
+        </div>
 
         @if (showError()) {
             <div>

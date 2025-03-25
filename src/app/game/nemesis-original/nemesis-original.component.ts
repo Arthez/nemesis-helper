@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, Signal, signal, WritableSignal } from '@angular/core';
 import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LogItem } from '@common/classes/logger.class';
 import { MonstersSectionComponent } from '@common/components/common-game-sections/monsters-section/monsters-section.component';
@@ -28,6 +29,7 @@ import { GameKey, GameSetupDataOriginal } from '@configs/games.config';
 import { defaultMonsterBagConfig, getMonsterTokensConfig, MonsterTokenConfig } from '@configs/nog-specific/monster-token.config';
 import { getPhasesConfig, Stage, stagesSummaryConfig } from '@configs/nog-specific/phases.config';
 import { getRoundConfigs, RoundTrackerEvent } from '@configs/nog-specific/round.config';
+import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { NemesisOriginalLoggerService } from './nemesis-original-logger.service';
 import { NemesisOriginalModalService } from './nemesis-original-modal.service';
@@ -67,12 +69,15 @@ export class NemesisOriginalComponent {
     protected readonly nemesisOriginalModalService: NemesisOriginalModalService = inject(NemesisOriginalModalService);
     protected readonly nemesisOriginalLoggerService: NemesisOriginalLoggerService = inject(NemesisOriginalLoggerService);
     protected readonly monsterBagService: MonsterTokensService<MonsterTokenConfig> = inject(MonsterTokensService);
+    protected readonly translateService: TranslateService = inject(TranslateService);
+    protected readonly matSnackBar: MatSnackBar = inject(MatSnackBar);
     protected readonly router: Router = inject(Router);
     protected readonly gameId: GameKey = inject(GAME_ID);
 
     protected readonly hibernationChambersOpeningRoundNum: number = hibernationChambersOpeningRoundNum;
     protected readonly gameSetupData: GameSetupDataOriginal | undefined = StorageManager.loadGameSetupData(this.gameId);
     protected readonly stateData: NemesisOriginalState | undefined = this.loadGameState();
+    protected readonly monstersEnabled: boolean = !this.gameSetupData?.monstersDisabled;
     protected readonly phasesConfig: WritableSignal<PhaseConfig<Stage>[]> = signal(getPhasesConfig());
     protected readonly rounds: WritableSignal<NogRoundItem[]> = signal(this.stateData?.rounds || this.getInitialRounds());
     protected readonly endRoundNum: WritableSignal<number> = signal(
@@ -86,8 +91,10 @@ export class NemesisOriginalComponent {
     protected readonly availableMonsters: Signal<MonsterTokenConfig[]> = this.monsterBagService.availableMonsters;
     protected readonly bagMonsters: Signal<MonsterTokenConfig[]> = this.monsterBagService.bagMonsters;
     protected readonly autodestruction: WritableSignal<Autodestruction | undefined> = signal(this.stateData?.autodestruction || undefined);
+    protected readonly monsterEncounterHappenedRoundNum: WritableSignal<number | undefined> =
+        signal(this.stateData?.monsterEncounterHappenedRoundNum);
     protected readonly summaryData: Signal<ContentItem> = computed(() => stagesSummaryConfig[this.activeStage()]);
-    private monsterEncounterHappenedRoundNum: number | undefined = this.stateData?.monsterEncounterHappenedRoundNum;
+
 
     public constructor() {
         if (this.stateData) {
@@ -132,8 +139,7 @@ export class NemesisOriginalComponent {
         this.activeStage.set(stage);
         switch (stage) {
             case 'draw_cards': {
-                this.saveGameState();
-                this.saveLogs();
+                this.saveGame();
                 break;
             }
             case 'round_tracker_update': {
@@ -141,7 +147,9 @@ export class NemesisOriginalComponent {
                 break;
             }
             case 'monster_development': {
-                this.triggerMonsterDevelopment();
+                if (this.monstersEnabled) {
+                    this.triggerMonsterDevelopment();
+                }
                 break;
             }
             default:
@@ -149,14 +157,13 @@ export class NemesisOriginalComponent {
         }
     }
 
-    protected drawMonster(): void {
-        const monster: MonsterTokenConfig | undefined = this.monsterBagService.getMonsterEncounterFromBag();
+    protected drawMonster(monsterType: MonsterType | null): void {
+        const monster: MonsterTokenConfig | undefined = this.monsterBagService.getMonsterEncounterFromBag(monsterType);
         if (monster) {
             this.nemesisOriginalLoggerService.logMonsterEncounter(monster);
             this.nemesisOriginalModalService.openMonsterWarning(monster).subscribe(() => {
-                if (monster.type !== MonsterType.BLANK && !this.monsterEncounterHappenedRoundNum) {
-                    this.monsterEncounterHappenedRoundNum = this.activeRoundNum();
-                    this.nemesisOriginalModalService.openFirstEncounterWarning();
+                if (monster.type !== MonsterType.BLANK && !this.monsterEncounterHappenedRoundNum()) {
+                    this.handleFirstMonsterEncounter();
                 }
             });
         }
@@ -192,6 +199,11 @@ export class NemesisOriginalComponent {
         });
     }
 
+    protected handleFirstMonsterEncounter(): void {
+        this.monsterEncounterHappenedRoundNum.set(this.activeRoundNum());
+        this.nemesisOriginalModalService.openFirstEncounterWarning();
+    }
+
     protected showGameEndModal(): void {
         const gameState: GameSetupDataOriginal | undefined = StorageManager.loadGameSetupData(this.gameId) || this.gameSetupData;
         if (gameState) {
@@ -221,8 +233,20 @@ export class NemesisOriginalComponent {
         this.nemesisOriginalModalService.openLogs(this.nemesisOriginalLoggerService.logs());
     }
 
+    protected openReloadGameModal(): void {
+        this.nemesisOriginalModalService.openReload(this.nemesisOriginalLoggerService.logs()).subscribe(result => {
+            if (result) {
+                window.location.reload();
+            }
+        });
+    }
+
     protected goToLandingPage(): void {
-        this.router.navigate(['/']);
+        this.nemesisOriginalModalService.openExitWarning().subscribe(result => {
+            if (result) {
+                this.router.navigate(['/']);
+            }
+        });
     }
 
     private getInitialRounds(): NogRoundItem[] {
@@ -258,7 +282,7 @@ export class NemesisOriginalComponent {
         this.nemesisOriginalLoggerService.logMonsterDevelopment(developmentResult);
         this.nemesisOriginalModalService.openMonsterDevelopmentResult(developmentResult).subscribe(queenInNestConfirmed => {
             if (queenInNestConfirmed) {
-                this.monsterEncounterHappenedRoundNum = this.activeRoundNum();
+                this.monsterEncounterHappenedRoundNum.set(this.activeRoundNum());
                 this.monsterBagService.summonQueenInNest();
             }
         });
@@ -300,6 +324,7 @@ export class NemesisOriginalComponent {
 
     private saveGameState(): void {
         StorageManager.saveGameState<NemesisOriginalState>(this.gameId, {
+            dateIso: (new Date()).toISOString(),
             rounds: this.rounds(),
             endRoundNum: this.endRoundNum(),
             activeRoundNum: this.activeRoundNum(),
@@ -308,7 +333,7 @@ export class NemesisOriginalComponent {
             availableMonsters: this.availableMonsters(),
             bagMonsters: this.bagMonsters(),
             autodestruction: this.autodestruction(),
-            monsterEncounterHappenedRoundNum: this.monsterEncounterHappenedRoundNum,
+            monsterEncounterHappenedRoundNum: this.monsterEncounterHappenedRoundNum(),
         });
         this.nemesisOriginalLoggerService.logSaveGameState();
     }
@@ -323,6 +348,16 @@ export class NemesisOriginalComponent {
 
     private loadLogs(): LogItem[] {
         return StorageManager.loadGameLogs(this.gameId) || [];
+    }
+
+    private notifyAboutSave(): void {
+        this.matSnackBar.open(this.translateService.instant('tk.notification.game-saved'), undefined, { duration: 3000 });
+    }
+
+    private saveGame(): void {
+        this.saveGameState();
+        this.saveLogs();
+        this.notifyAboutSave();
     }
 
 }

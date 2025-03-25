@@ -5,6 +5,7 @@ import { MonsterTokenConfig } from '@configs/nog-specific/monster-token.config';
 import { Stage } from '@configs/nog-specific/phases.config';
 
 export interface NemesisOriginalState {
+    dateIso: string;
     rounds: NogRoundItem[];
     endRoundNum: number;
     activeRoundNum: number;

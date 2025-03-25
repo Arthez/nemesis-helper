@@ -3,6 +3,7 @@ import { LogItem } from '@common/classes/logger.class';
 import { FaqModalComponent, FaqModalData } from '@common/components/drawer/faq-modal/faq-modal.component';
 import { KeyMomentsModalComponent, KeyMomentsModalData } from '@common/components/drawer/key-moments-modal/key-moments-modal.component';
 import { LogsModalComponent, LogsModalData } from '@common/components/drawer/logs-modal/logs-modal.component';
+import { ReloadModalComponent, ReloadModalData } from '@common/components/drawer/reload-modal/reload-modal.component';
 import { RoomsModalComponent, RoomsModalData } from '@common/components/drawer/rooms-modal/rooms-modal.component';
 import {
     MonsterDevelopmentModalComponent,
@@ -194,6 +195,17 @@ export class NemesisOriginalModalService {
         });
     }
 
+    public openReload(logs: LogItem[]): Observable<boolean | undefined> {
+        return this.modalService.openComponent<ReloadModalComponent, ReloadModalData>(ReloadModalComponent, {
+            ...optionalActionModalConfig,
+            panelClass: 'medium-modal',
+            data: {
+                gameId: this.gameId,
+                logs,
+            },
+        });
+    }
+
     public openMonsterDevelopmentResult(developmentResult: MonsterDevelopmentResult<MonsterTokenBase>): Observable<boolean | undefined> {
         return this.modalService.openComponent<MonsterDevelopmentModalComponent, MonsterDevelopmentModalData>(
             MonsterDevelopmentModalComponent,
@@ -207,6 +219,15 @@ export class NemesisOriginalModalService {
                 },
             },
         );
+    }
+
+    public openExitWarning(): Observable<boolean | undefined> {
+        return this.modalService.openConfirmation({
+            titleKey: 'tk.exit-confirmation-modal.title',
+            messageKey: 'tk.exit-confirmation-modal.message',
+            yesButtonKey: 'tk.general.label.button.continue',
+            noButtonKey: 'tk.general.label.button.back',
+        });
     }
 
 }

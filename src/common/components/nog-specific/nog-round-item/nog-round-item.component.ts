@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { NogRoundItem } from '@common/components/nog-specific/nog-round-item/nog-round-item.interface';
 import { Autodestruction } from '@common/interfaces/autodestruction.interface';
@@ -16,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
         TranslateModule,
         NgClass,
         AutodestructionDisableRoundPipe,
+        MatIcon,
     ],
     templateUrl: './nog-round-item.component.html',
     styleUrl: './nog-round-item.component.scss',
@@ -28,5 +30,6 @@ export class NogRoundItemComponent {
     @Input({ required: true }) public endRoundNum: number = 0;
     @Input({ required: true }) public autodestruction: Autodestruction | undefined;
     @Input({ required: true }) public hibernationRoundNum: number = 0;
+    @Input({ required: false }) public monsterEncounterHappenedRoundNum: number | undefined;
 
 }

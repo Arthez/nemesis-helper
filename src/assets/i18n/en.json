@@ -11,6 +11,7 @@
     "tk.general.label.button.continue": "Continue",
     "tk.general.label.button.close": "Close",
     "tk.general.label.button.finish": "Finish",
+    "tk.general.label.button.load": "Load",
 
     "tk.drawer.tooltip.change-language": "Change language",
     "tk.drawer.tooltip.change-ui-mode": "Change UI theme",
@@ -18,8 +19,11 @@
     "tk.drawer.tooltip.faq": "Show FAQ",
     "tk.drawer.tooltip.key-moments": "Show critical gameplay moments",
     "tk.drawer.tooltip.game-logs": "Show game logs",
+    "tk.drawer.tooltip.reload": "Load recent game state",
     "tk.drawer.tooltip.about": "About application",
     "tk.drawer.tooltip.new-game": "Start new game",
+
+    "tk.notification.game-saved": "Game has been saved!",
 
     "tk.config.label.game-mode.semi-co-op": "Semi co-op",
     "tk.config.label.game-mode.full-co-op": "Full co-op",
@@ -72,7 +76,7 @@
 
     "tk.nog.config.label.phase1": "Player phase",
     "tk.nog.config.label.phase2": "Event phase",
-    "tk.nog.config.label.phase1.stage1.draw-cards": "Draw action cards",
+    "tk.nog.config.label.phase1.stage1.draw-cards": "Draw action cards (game auto-save)",
     "tk.nog.config.label.phase1.stage1.content": "<div class=\"description\">\n    <div class=\"p bold\">At the start of each Player Phase, all players draw cards from their Action deck until they have a hand size of 5 cards.</div>\n    <div class=\"p\">If the game (at any time) requires you to draw a card and add it to your hand, and your Action deck is empty, shuffle all the cards in your discard pile – these will form your new Action deck. Then, draw the required number of cards.</div>\n</div>",
     "tk.nog.config.label.phase1.stage2.first-player-transfer": "First player token",
     "tk.nog.config.label.phase1.stage2.content": "<div class=\"description\">\n    <div class=\"p bold\">After all the Players have drawn their Action cards, the player with the First Player token passes it to the player on their left.</div>\n    <div class=\"p note\">Note: In the first turn of the game, do not pass the First Player token.</div>\n    <div class=\"p\">Each time players are required to do anything in order, start with the player with the First Player token, and then continue with each player in clockwise order.</div>\n</div>",
@@ -92,7 +96,7 @@
     "tk.nog.config.label.phase2.stage9.content": "<div class=\"description\">\n    <div class=\"p bold\">Draw 1 Intruder token from the Intruder bag.</div>\n    <div class=\"p\">The Effect depends on the drawn token:</div>\n    <div class=\"p\"><b>LARVA</b> – Remove this token from the Intruder bag and add 1 Adult Intruder token to the Intruder bag.</div>\n    <div class=\"p\"><b>CREEPER</b> – Remove this token from the Intruder bag and add 1 Breeder token to the Intruder bag.</div>\n    <div class=\"p\"><b>ADULT</b> – All players roll for Noise in turn order. If a player’s Character is in Combat with an Intruder, this player does not perform a <b>Noise roll</b>. Return the Adult Intruder token to the Intruder bag.</div>\n    <div class=\"p more\">More on Noise roll – see page 15.</div>\n    <div class=\"p\"><b>BREEDER</b> – All players roll for Noise in turn order. If a player’s Character is in Combat with an Intruder, this player does not perform a <b>Noise roll</b>. Return the Breeder token to the Intruder bag.</div>\n    <div class=\"p\"><b>QUEEN</b> – If there are any Characters in the Nest Room, place the Queen miniature in that Room and resolve an Encounter.</div>\n    <div class=\"p more\">More on Encounters – see page 18.</div>\n    <div class=\"p\">If there are no Characters in the Nest (or its location has not been discovered yet), add an additional Intruder Egg token to the Intruder board. Return the Queen token to the Intruder bag.</div>\n    <div class=\"p\"><b>BLANK</b> – Add 1 Adult Intruder token to the Intruder bag. If there are no Adult Intruder tokens available, nothing happens. Return the Blank token to the Intruder bag</div>\n</div>",
     "tk.nld.config.label.phase1": "Player phase",
     "tk.nld.config.label.phase2": "Event phase",
-    "tk.nld.config.label.phase1.stage1.draw-cards": "Draw action cards",
+    "tk.nld.config.label.phase1.stage1.draw-cards": "Draw action cards (game auto-save)",
     "tk.nld.config.label.phase1.stage1.content": "<div class=\"description\">\n    <div class=\"p bold\">At the start of each Player Phase, all players draw cards from their Action deck until they have a hand size of 5 cards.</div>\n    <div class=\"p\">If at any time you are required to draw a card and your deck is empty, first shuffle the cards in your discard pile to form a new Action deck. Then, draw the required number of cards.</div>\n</div>",
     "tk.nld.config.label.phase1.stage2.first-player-transfer": "First player token",
     "tk.nld.config.label.phase1.stage2.content": "<div class=\"description\">\n    <div class=\"p bold\">After all players have drawn their Action cards, the player with the First Player token passes it to the player on their left.</div>\n    <div class=\"p note\">Note: In the first round of the game, do not pass the First Player token.</div>\n    <div class=\"p\">Each time players are required to do anything in order, start with the player with the First Player token, and then continue in clockwise order.</div>\n</div>",
@@ -174,6 +178,10 @@
     "tk.selected-game-setup.label.player": "Player",
     "tk.selected-game-setup.label.enable-timer": "Enable time counting",
     "tk.selected-game-setup.tooltip.enable-timer": "When selected, this option will enable counting player turn time. In order to start counting for player X, press X on the keyboard or click on button with player name. When any modal is opened - counting time is stopped!",
+    "tk.nog.selected-game-setup.label.disable-monsters": "Disable automated Intruders",
+    "tk.nog.selected-game-setup.tooltip.disable-monsters": "When selected, this option will disable automated functionalities related to Intruders. Intruder token section will be hidden, all token and Intruder related actions will NOT be handled by application - will have to be handled manually!",
+    "tk.nld.selected-game-setup.label.disable-monsters": "Disable automated Intruders",
+    "tk.nld.selected-game-setup.tooltip.disable-monsters": "When selected, this option will disable automated functionalities related to Intruders. Intruder token section will be hidden, all token and Intruder related actions will NOT be handled by application - will have to be handled manually!",
     "tk.selected-game-setup.label.randomize-players": "Assign player number randomly",
     "tk.selected-game-setup.tooltip.randomize-players": "When selected, this option will randomize player number assignments (determining first player when starting the game and important for goals). Player number will be shown next to player name as (X).",
     "tk.selected-game-setup.error.not-enough-players": "Must fill at least 1 player name!",
@@ -202,8 +210,10 @@
     "tk.nld.round.label.css.move-right": "Move right",
     "tk.nld.round.label.event.power.off": "Turn off backup power",
     "tk.nld.round.label.event.power.on": "Turn on backup power",
+    "tk.nog.round.label.event.first-encounter": "Activate first encounter",
     "tk.nog.round.label.event.autodestruction.stop": "Stop self-destruct",
     "tk.nog.round.label.event.autodestruction.start": "Initiate self-destruct",
+    "tk.nld.round.label.event.first-encounter": "Activate first encounter",
     "tk.nld.round.label.event.autodestruction.stop": "Stop autodestruction",
     "tk.nld.round.label.event.autodestruction.start": "Initiate autodestruction",
     "tk.nld.round.label.event.alert-procedure.trigger": "Start the alert procedure",
@@ -216,6 +226,8 @@
     "tk.phases.button.next-stage": "Next step",
 
     "tk.monsters.button.draw": "Encounter",
+    "tk.monsters.button.draw.random": "RANDOM",
+    "tk.monsters.button.draw.manual": "Choose",
     "tk.monsters.button.add": "Add",
     "tk.monsters.button.details": "Preview",
     "tk.monsters.label.active-monsters": "Active",
@@ -510,6 +522,13 @@
     "tk.nog.logs-modal.filter.monster-type": "Intruder events",
     "tk.nld.logs-modal.filter.monster-type": "Intruder events",
 
+    "tk.reload-modal.title": "Load previous game state",
+    "tk.reload-modal.label.info": "Do you want to load previous state of game from {{time}} (start round at time tracker position {{round}})?",
+    "tk.reload-modal.label.revert": "Following events will be reverted:",
+    "tk.reload-modal.label.empty-logs": "No events (game was saved without any further events)",
+    "tk.reload-modal.label.no-save": "Nothing was saved yet",
+    "tk.reload-modal.label.cannot-revert": "This action cannot be reverted!",
+
     "tk.about-modal.title": "About application (v{{appVer}})",
     "tk.about-modal.label.developer": "Application developer",
     "tk.about-modal.label.repository": "Official repository",
@@ -524,5 +543,8 @@
     "tk.about-modal.label.info.hotkey-next-step": "You can press \">\" on keyboard to trigger \"Next step\"",
     "tk.about-modal.label.info.hotkey-player-timer": "You can press \"1\", \"2\", \"3\", \"4\", on keyboard to toggle timer for \"X\" player when timers are enabled",
     "tk.about-modal.label.info.languages": "Two languages available: English, Polish (log records only available in english)",
-    "tk.about-modal.label.info.shuffling": "Monster token shuffling is based on triple Fisher–Yates shuffle algorithm"
+    "tk.about-modal.label.info.shuffling": "Monster token shuffling is based on triple Fisher–Yates shuffle algorithm",
+
+    "tk.exit-confirmation-modal.title": "Exit current game",
+    "tk.exit-confirmation-modal.message": "Are you sure you want to exit current game? All unsaved changes will be lost!"
 }

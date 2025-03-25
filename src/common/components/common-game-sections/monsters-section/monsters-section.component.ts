@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MonsterItemComponent } from '@common/components/monsters/monster-item/monster-item.component';
 import { NonFocusableDirective } from '@common/directives/non-focusable.directive';
@@ -23,6 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
         MonsterTypeTkPipe,
         MonsterAttainablePipe,
         NonFocusableDirective,
+        MatIcon,
     ],
     templateUrl: './monsters-section.component.html',
     styleUrl: './monsters-section.component.scss',
@@ -32,8 +34,9 @@ export class MonstersSectionComponent {
 
     @Input({ required: true }) public activeMonsters: MonsterTokenBase[] = [];
     @Input({ required: true }) public availableMonsters: MonsterTokenBase[] = [];
+    @Input({ required: true }) public bagMonsters: MonsterTokenBase[] = [];
 
-    @Output() public draw: EventEmitter<void> = new EventEmitter<void>();
+    @Output() public draw: EventEmitter<MonsterType | null> = new EventEmitter<MonsterType | null>();
     @Output() public add: EventEmitter<MonsterType> = new EventEmitter<MonsterType>();
     @Output() public details: EventEmitter<void> = new EventEmitter<void>();
     @Output() public monsterKill: EventEmitter<MonsterTokenBase> = new EventEmitter<MonsterTokenBase>();

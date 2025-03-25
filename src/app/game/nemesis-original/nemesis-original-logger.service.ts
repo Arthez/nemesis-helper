@@ -1,5 +1,5 @@
 import { Injectable, Signal } from '@angular/core';
-import { Logger, LogItem } from '@common/classes/logger.class';
+import { gameSavedLogText, Logger, LogItem } from '@common/classes/logger.class';
 import { Autodestruction } from '@common/interfaces/autodestruction.interface';
 import { MonsterDevelopmentResult } from '@common/interfaces/monster-development-result.interface';
 import { MonsterTokenBase } from '@common/interfaces/monster-token-base.interface';
@@ -56,7 +56,7 @@ export class NemesisOriginalLoggerService {
     }
 
     public logSaveGameState(): void {
-        this.logger.addRecord('GAME SAVED!', 'event');
+        this.logger.addRecord(gameSavedLogText, 'event');
     }
 
     public logAutodestructionStateInevitable(): void {

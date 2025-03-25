@@ -1,5 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal, WritableSignal } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MonsterType } from '@common/enums/monster-types.enum';
 import { MonsterTokenBase } from '@common/interfaces/monster-token-base.interface';
@@ -26,6 +27,7 @@ interface MonsterToken extends MonsterTokenBase {
         MatMenu,
         MatMenuItem,
         MatMenuTrigger,
+        MatIcon,
     ],
     templateUrl: './monster-item.component.html',
     styleUrl: './monster-item.component.scss',

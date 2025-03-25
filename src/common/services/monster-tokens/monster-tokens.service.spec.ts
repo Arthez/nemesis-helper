@@ -358,188 +358,303 @@ describe('MonsterTokensService', () => {
     });
 
     describe('getMonsterEncounterFromBag', () => {
-        it('should NOT transfer anything when bag is empty', () => {
-            const availableMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.ADULT, id: 'A1' },
-                { type: MonsterType.ADULT, id: 'A2' },
-                { type: MonsterType.ADULT, id: 'A3' },
-            ];
-            const activeMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.CREEPER, id: 'C1' },
-                { type: MonsterType.CREEPER, id: 'C2' },
-                { type: MonsterType.CREEPER, id: 'C3' },
-            ];
-            const bagMonstersShortMock: MonsterTokenBase[] = [];
+        describe('for random encounter (null)', () => {
+            it('should NOT transfer anything when bag is empty', () => {
+                const availableMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.ADULT, id: 'A1' },
+                    { type: MonsterType.ADULT, id: 'A2' },
+                    { type: MonsterType.ADULT, id: 'A3' },
+                ];
+                const activeMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.CREEPER, id: 'C1' },
+                    { type: MonsterType.CREEPER, id: 'C2' },
+                    { type: MonsterType.CREEPER, id: 'C3' },
+                ];
+                const bagMonstersShortMock: MonsterTokenBase[] = [];
 
-            service.loadBags({
-                availableMonsters: availableMonstersShortMock,
-                activeMonsters: activeMonstersShortMock,
-                bagMonsters: bagMonstersShortMock,
+                service.loadBags({
+                    availableMonsters: availableMonstersShortMock,
+                    activeMonsters: activeMonstersShortMock,
+                    bagMonsters: bagMonstersShortMock,
+                });
+                const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag(null);
+
+                expect(monsterEncounter).toEqual(undefined);
+
+                expect(service.availableMonsters()
+                    .every(monster => ['A1', 'A2', 'A3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.availableMonsters().length).toEqual(3);
+                expect(service.activeMonsters()
+                    .every(monster => ['C1', 'C2', 'C3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.activeMonsters().length).toEqual(3);
+
+                expect(service.bagMonsters().length).toEqual(0);
             });
-            const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag();
 
-            expect(monsterEncounter).toEqual(undefined);
+            it('should transfer A5 when to active', () => {
+                const availableMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.ADULT, id: 'A1' },
+                    { type: MonsterType.ADULT, id: 'A2' },
+                    { type: MonsterType.ADULT, id: 'A3' },
+                ];
+                const activeMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.CREEPER, id: 'C1' },
+                    { type: MonsterType.CREEPER, id: 'C2' },
+                    { type: MonsterType.CREEPER, id: 'C3' },
+                ];
+                const bagMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.ADULT, id: 'A5' },
+                ];
 
-            expect(service.availableMonsters()
-                .every(monster => ['A1', 'A2', 'A3']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.availableMonsters().length).toEqual(3);
-            expect(service.activeMonsters()
-                .every(monster => ['C1', 'C2', 'C3']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.activeMonsters().length).toEqual(3);
+                service.loadBags({
+                    availableMonsters: availableMonstersShortMock,
+                    activeMonsters: activeMonstersShortMock,
+                    bagMonsters: bagMonstersShortMock,
+                });
+                const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag(null);
 
-            expect(service.bagMonsters().length).toEqual(0);
+                expect(monsterEncounter).toEqual({ type: MonsterType.ADULT, id: 'A5' });
+
+                expect(service.availableMonsters()
+                    .every(monster => ['A1', 'A2', 'A3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.availableMonsters().length).toEqual(3);
+                expect(service.activeMonsters()
+                    .every(monster => ['C1', 'C2', 'C3', 'A5']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.activeMonsters().length).toEqual(4);
+
+                expect(service.bagMonsters().length).toEqual(0);
+            });
+
+            it('should add A1 when encountered BLANK token and its only token in the bag', () => {
+                const availableMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.ADULT, id: 'A1' },
+                ];
+                const activeMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.CREEPER, id: 'C1' },
+                    { type: MonsterType.CREEPER, id: 'C2' },
+                    { type: MonsterType.CREEPER, id: 'C3' },
+                ];
+                const bagMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.BLANK, id: 'BLANK1' },
+                ];
+
+                service.loadBags({
+                    availableMonsters: availableMonstersShortMock,
+                    activeMonsters: activeMonstersShortMock,
+                    bagMonsters: bagMonstersShortMock,
+                });
+                const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag(null);
+
+                expect(monsterEncounter).toEqual({ type: MonsterType.BLANK, id: 'BLANK1' });
+
+                expect(service.availableMonsters().length).toEqual(0);
+
+                expect(service.activeMonsters()
+                    .every(monster => ['C1', 'C2', 'C3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.activeMonsters().length).toEqual(3);
+
+                expect(service.bagMonsters()
+                    .every(monster => ['BLANK1', 'A1']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.bagMonsters().length).toEqual(2);
+            });
+
+            // This is impossible to test due to shuffle (but used it to test it once locally)
+            xit('should do nothing when encountered BLANK token and its NOT only token in the bag', () => {
+                const availableMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.ADULT, id: 'A1' },
+                ];
+                const activeMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.CREEPER, id: 'C1' },
+                    { type: MonsterType.CREEPER, id: 'C2' },
+                    { type: MonsterType.CREEPER, id: 'C3' },
+                ];
+                const bagMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.QUEEN, id: 'Q1' },
+                    { type: MonsterType.BLANK, id: 'BLANK1' },
+                ];
+
+                service.loadBags({
+                    availableMonsters: availableMonstersShortMock,
+                    activeMonsters: activeMonstersShortMock,
+                    bagMonsters: bagMonstersShortMock,
+                });
+                const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag(null);
+
+                expect(monsterEncounter).toEqual({ type: MonsterType.BLANK, id: 'BLANK1' });
+
+                expect(service.availableMonsters()
+                    .every(monster => ['A1']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.availableMonsters().length).toEqual(1);
+
+                expect(service.activeMonsters()
+                    .every(monster => ['C1', 'C2', 'C3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.activeMonsters().length).toEqual(3);
+
+                expect(service.bagMonsters()
+                    .every(monster => ['BLANK1', 'Q1']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.bagMonsters().length).toEqual(2);
+            });
+
+            it('should do nothing when encountered BLANK token and there is NO adults available', () => {
+                const availableMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.LARVA, id: 'L1' },
+                    { type: MonsterType.LARVA, id: 'L2' },
+                ];
+                const activeMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.CREEPER, id: 'C1' },
+                    { type: MonsterType.CREEPER, id: 'C2' },
+                    { type: MonsterType.CREEPER, id: 'C3' },
+                ];
+                const bagMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.BLANK, id: 'BLANK1' },
+                ];
+
+                service.loadBags({
+                    availableMonsters: availableMonstersShortMock,
+                    activeMonsters: activeMonstersShortMock,
+                    bagMonsters: bagMonstersShortMock,
+                });
+                const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag(null);
+
+                expect(monsterEncounter).toEqual({ type: MonsterType.BLANK, id: 'BLANK1' });
+
+                expect(service.availableMonsters()
+                    .every(monster => ['L1', 'L2']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.availableMonsters().length).toEqual(2);
+
+                expect(service.activeMonsters()
+                    .every(monster => ['C1', 'C2', 'C3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.activeMonsters().length).toEqual(3);
+
+                expect(service.bagMonsters()
+                    .every(monster => ['BLANK1']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.bagMonsters().length).toEqual(1);
+            });
         });
 
-        it('should transfer A5 when to active', () => {
-            const availableMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.ADULT, id: 'A1' },
-                { type: MonsterType.ADULT, id: 'A2' },
-                { type: MonsterType.ADULT, id: 'A3' },
-            ];
-            const activeMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.CREEPER, id: 'C1' },
-                { type: MonsterType.CREEPER, id: 'C2' },
-                { type: MonsterType.CREEPER, id: 'C3' },
-            ];
-            const bagMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.ADULT, id: 'A5' },
-            ];
+        describe('for manually chosen monster (not null)', () => {
+            it('should NOT transfer anything when bag is empty', () => {
+                const availableMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.ADULT, id: 'A1' },
+                    { type: MonsterType.ADULT, id: 'A2' },
+                    { type: MonsterType.ADULT, id: 'A3' },
+                ];
+                const activeMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.CREEPER, id: 'C1' },
+                    { type: MonsterType.CREEPER, id: 'C2' },
+                    { type: MonsterType.CREEPER, id: 'C3' },
+                ];
+                const bagMonstersShortMock: MonsterTokenBase[] = [];
 
-            service.loadBags({
-                availableMonsters: availableMonstersShortMock,
-                activeMonsters: activeMonstersShortMock,
-                bagMonsters: bagMonstersShortMock,
+                service.loadBags({
+                    availableMonsters: availableMonstersShortMock,
+                    activeMonsters: activeMonstersShortMock,
+                    bagMonsters: bagMonstersShortMock,
+                });
+                const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag(MonsterType.ADULT);
+
+                expect(monsterEncounter).toEqual(undefined);
+
+                expect(service.availableMonsters()
+                    .every(monster => ['A1', 'A2', 'A3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.availableMonsters().length).toEqual(3);
+                expect(service.activeMonsters()
+                    .every(monster => ['C1', 'C2', 'C3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.activeMonsters().length).toEqual(3);
+
+                expect(service.bagMonsters().length).toEqual(0);
             });
-            const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag();
 
-            expect(monsterEncounter).toEqual({ type: MonsterType.ADULT, id: 'A5' });
+            it('should NOT transfer anything when chosen monster type does not exist in the bag', () => {
+                const availableMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.ADULT, id: 'A1' },
+                    { type: MonsterType.ADULT, id: 'A2' },
+                    { type: MonsterType.ADULT, id: 'A3' },
+                ];
+                const activeMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.CREEPER, id: 'C1' },
+                    { type: MonsterType.CREEPER, id: 'C2' },
+                    { type: MonsterType.CREEPER, id: 'C3' },
+                ];
+                const bagMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.ADULT, id: 'A4' },
+                    { type: MonsterType.ADULT, id: 'A5' },
+                    { type: MonsterType.ADULT, id: 'A6' },
+                ];
 
-            expect(service.availableMonsters()
-                .every(monster => ['A1', 'A2', 'A3']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.availableMonsters().length).toEqual(3);
-            expect(service.activeMonsters()
-                .every(monster => ['C1', 'C2', 'C3', 'A5']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.activeMonsters().length).toEqual(4);
+                service.loadBags({
+                    availableMonsters: availableMonstersShortMock,
+                    activeMonsters: activeMonstersShortMock,
+                    bagMonsters: bagMonstersShortMock,
+                });
+                const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag(MonsterType.BREEDER);
 
-            expect(service.bagMonsters().length).toEqual(0);
-        });
+                expect(monsterEncounter?.type).toEqual(undefined);
 
-        it('should add A1 when encountered BLANK token and its only token in the bag', () => {
-            const availableMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.ADULT, id: 'A1' },
-            ];
-            const activeMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.CREEPER, id: 'C1' },
-                { type: MonsterType.CREEPER, id: 'C2' },
-                { type: MonsterType.CREEPER, id: 'C3' },
-            ];
-            const bagMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.BLANK, id: 'BLANK1' },
-            ];
-
-            service.loadBags({
-                availableMonsters: availableMonstersShortMock,
-                activeMonsters: activeMonstersShortMock,
-                bagMonsters: bagMonstersShortMock,
+                expect(service.availableMonsters()
+                    .every(monster => ['A1', 'A2', 'A3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.availableMonsters().length).toEqual(3);
+                expect(service.activeMonsters()
+                    .every(monster => ['C1', 'C2', 'C3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.activeMonsters().length).toEqual(3);
+                expect(service.bagMonsters()
+                    .every(monster => ['A4', 'A5', 'A6']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.bagMonsters().length).toEqual(3);
             });
-            const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag();
 
-            expect(monsterEncounter).toEqual({ type: MonsterType.BLANK, id: 'BLANK1' });
+            it('should transfer Adult monster type to active', () => {
+                const availableMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.ADULT, id: 'A1' },
+                    { type: MonsterType.ADULT, id: 'A2' },
+                    { type: MonsterType.ADULT, id: 'A3' },
+                ];
+                const activeMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.CREEPER, id: 'C1' },
+                    { type: MonsterType.CREEPER, id: 'C2' },
+                    { type: MonsterType.CREEPER, id: 'C3' },
+                ];
+                const bagMonstersShortMock: MonsterTokenBase[] = [
+                    { type: MonsterType.ADULT, id: 'A4' },
+                    { type: MonsterType.ADULT, id: 'A5' },
+                    { type: MonsterType.ADULT, id: 'A6' },
+                ];
 
-            expect(service.availableMonsters().length).toEqual(0);
+                service.loadBags({
+                    availableMonsters: availableMonstersShortMock,
+                    activeMonsters: activeMonstersShortMock,
+                    bagMonsters: bagMonstersShortMock,
+                });
+                const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag(MonsterType.ADULT);
 
-            expect(service.activeMonsters()
-                .every(monster => ['C1', 'C2', 'C3']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.activeMonsters().length).toEqual(3);
+                expect(monsterEncounter?.type).toEqual(MonsterType.ADULT);
 
-            expect(service.bagMonsters()
-                .every(monster => ['BLANK1', 'A1']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.bagMonsters().length).toEqual(2);
-        });
-
-        // This is impossible to test due to shuffle (but used it to test it once locally)
-        xit('should do nothing when encountered BLANK token and its NOT only token in the bag', () => {
-            const availableMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.ADULT, id: 'A1' },
-            ];
-            const activeMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.CREEPER, id: 'C1' },
-                { type: MonsterType.CREEPER, id: 'C2' },
-                { type: MonsterType.CREEPER, id: 'C3' },
-            ];
-            const bagMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.QUEEN, id: 'Q1' },
-                { type: MonsterType.BLANK, id: 'BLANK1' },
-            ];
-
-            service.loadBags({
-                availableMonsters: availableMonstersShortMock,
-                activeMonsters: activeMonstersShortMock,
-                bagMonsters: bagMonstersShortMock,
+                expect(service.availableMonsters()
+                    .every(monster => ['A1', 'A2', 'A3']
+                        .find(id => id === monster.id))).toEqual(true);
+                expect(service.availableMonsters().length).toEqual(3);
+                expect(service.activeMonsters().filter(monster => monster.type === MonsterType.CREEPER).length).toEqual(3);
+                expect(service.activeMonsters().filter(monster => monster.type === MonsterType.ADULT).length).toEqual(1);
+                expect(service.activeMonsters().length).toEqual(4);
+                expect(service.bagMonsters().filter(monster => monster.type === MonsterType.ADULT).length).toEqual(2);
+                expect(service.bagMonsters().length).toEqual(2);
             });
-            const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag();
-
-            expect(monsterEncounter).toEqual({ type: MonsterType.BLANK, id: 'BLANK1' });
-
-            expect(service.availableMonsters()
-                .every(monster => ['A1']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.availableMonsters().length).toEqual(1);
-
-            expect(service.activeMonsters()
-                .every(monster => ['C1', 'C2', 'C3']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.activeMonsters().length).toEqual(3);
-
-            expect(service.bagMonsters()
-                .every(monster => ['BLANK1', 'Q1']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.bagMonsters().length).toEqual(2);
-        });
-
-        it('should do nothing when encountered BLANK token and there is NO adults available', () => {
-            const availableMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.LARVA, id: 'L1' },
-                { type: MonsterType.LARVA, id: 'L2' },
-            ];
-            const activeMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.CREEPER, id: 'C1' },
-                { type: MonsterType.CREEPER, id: 'C2' },
-                { type: MonsterType.CREEPER, id: 'C3' },
-            ];
-            const bagMonstersShortMock: MonsterTokenBase[] = [
-                { type: MonsterType.BLANK, id: 'BLANK1' },
-            ];
-
-            service.loadBags({
-                availableMonsters: availableMonstersShortMock,
-                activeMonsters: activeMonstersShortMock,
-                bagMonsters: bagMonstersShortMock,
-            });
-            const monsterEncounter: MonsterTokenBase | undefined = service.getMonsterEncounterFromBag();
-
-            expect(monsterEncounter).toEqual({ type: MonsterType.BLANK, id: 'BLANK1' });
-
-            expect(service.availableMonsters()
-                .every(monster => ['L1', 'L2']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.availableMonsters().length).toEqual(2);
-
-            expect(service.activeMonsters()
-                .every(monster => ['C1', 'C2', 'C3']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.activeMonsters().length).toEqual(3);
-
-            expect(service.bagMonsters()
-                .every(monster => ['BLANK1']
-                    .find(id => id === monster.id))).toEqual(true);
-            expect(service.bagMonsters().length).toEqual(1);
         });
     });
 

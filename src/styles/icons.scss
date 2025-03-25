@@ -1,4 +1,5 @@
-$small-icon-size: 28px;
+$small-icon-size: 20px;
+$medium-icon-size: 28px;
 
 mat-icon {
     &.small-icon {
@@ -6,5 +7,12 @@ mat-icon {
         width: $small-icon-size !important;
         height: $small-icon-size !important;
         font-size: $small-icon-size !important;
+    }
+
+    &.medium-icon {
+        margin: 0 !important;
+        width: $medium-icon-size !important;
+        height: $medium-icon-size !important;
+        font-size: $medium-icon-size !important;
     }
 }
