@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { backgroundColorAnimation } from '@common/animations/background-color.animation';
 import { verticalShakeAnimation } from '@common/animations/vertical-shake.animation';
@@ -19,6 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
         TranslateModule,
         NgClass,
         AutodestructionDisableRoundPipe,
+        MatIcon,
     ],
     templateUrl: './nld-round-item.component.html',
     styleUrl: './nld-round-item.component.scss',
@@ -39,6 +41,7 @@ export class NldRoundItemComponent {
     @Input({ required: true }) public canMoveCssLeft: boolean = false;
     @Input({ required: true }) public canMoveCssRight: boolean = false;
     @Input({ required: false }) public isFirstRound: boolean = false;
+    @Input({ required: false }) public monsterEncounterHappenedRoundNum: number | undefined;
 
     @Output() public cssMove: EventEmitter<CssMoveSide> = new EventEmitter<CssMoveSide>();
 

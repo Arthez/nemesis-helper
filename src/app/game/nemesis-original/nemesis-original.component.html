@@ -31,7 +31,7 @@
                     [autodestruction]="autodestruction()"
                     [hibernationRoundNum]="hibernationChambersOpeningRoundNum"
                     [enableMonsterEncounterAction]="!monstersEnabled"
-                    [monsterEncounterHappenedRoundNum]="monsterEncounterHappenedRoundNum"
+                    [monsterEncounterHappenedRoundNum]="monsterEncounterHappenedRoundNum()"
                     (monsterEncounter)="handleFirstMonsterEncounter()"
                     (roundTrackerEvent)="onRoundTrackerEvent($event)">
                 </app-nog-round-tracker-section>

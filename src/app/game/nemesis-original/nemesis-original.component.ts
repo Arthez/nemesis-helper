@@ -91,8 +91,10 @@ export class NemesisOriginalComponent {
     protected readonly availableMonsters: Signal<MonsterTokenConfig[]> = this.monsterBagService.availableMonsters;
     protected readonly bagMonsters: Signal<MonsterTokenConfig[]> = this.monsterBagService.bagMonsters;
     protected readonly autodestruction: WritableSignal<Autodestruction | undefined> = signal(this.stateData?.autodestruction || undefined);
+    protected readonly monsterEncounterHappenedRoundNum: WritableSignal<number | undefined> =
+        signal(this.stateData?.monsterEncounterHappenedRoundNum);
     protected readonly summaryData: Signal<ContentItem> = computed(() => stagesSummaryConfig[this.activeStage()]);
-    protected monsterEncounterHappenedRoundNum: number | undefined = this.stateData?.monsterEncounterHappenedRoundNum;
+
 
     public constructor() {
         if (this.stateData) {
@@ -160,7 +162,7 @@ export class NemesisOriginalComponent {
         if (monster) {
             this.nemesisOriginalLoggerService.logMonsterEncounter(monster);
             this.nemesisOriginalModalService.openMonsterWarning(monster).subscribe(() => {
-                if (monster.type !== MonsterType.BLANK && !this.monsterEncounterHappenedRoundNum) {
+                if (monster.type !== MonsterType.BLANK && !this.monsterEncounterHappenedRoundNum()) {
                     this.handleFirstMonsterEncounter();
                 }
             });
@@ -198,7 +200,7 @@ export class NemesisOriginalComponent {
     }
 
     protected handleFirstMonsterEncounter(): void {
-        this.monsterEncounterHappenedRoundNum = this.activeRoundNum();
+        this.monsterEncounterHappenedRoundNum.set(this.activeRoundNum());
         this.nemesisOriginalModalService.openFirstEncounterWarning();
     }
 
@@ -276,7 +278,7 @@ export class NemesisOriginalComponent {
         this.nemesisOriginalLoggerService.logMonsterDevelopment(developmentResult);
         this.nemesisOriginalModalService.openMonsterDevelopmentResult(developmentResult).subscribe(queenInNestConfirmed => {
             if (queenInNestConfirmed) {
-                this.monsterEncounterHappenedRoundNum = this.activeRoundNum();
+                this.monsterEncounterHappenedRoundNum.set(this.activeRoundNum());
                 this.monsterBagService.summonQueenInNest();
             }
         });
@@ -327,7 +329,7 @@ export class NemesisOriginalComponent {
             availableMonsters: this.availableMonsters(),
             bagMonsters: this.bagMonsters(),
             autodestruction: this.autodestruction(),
-            monsterEncounterHappenedRoundNum: this.monsterEncounterHappenedRoundNum,
+            monsterEncounterHappenedRoundNum: this.monsterEncounterHappenedRoundNum(),
         });
         this.nemesisOriginalLoggerService.logSaveGameState();
     }

@@ -4,6 +4,11 @@
             <div [ngClass]="autodestruction.state">☢</div>
         </div>
     }
+    @if (monsterEncounterHappenedRoundNum === roundConfig.num) {
+        <div class="first-encounter">
+            <mat-icon svgIcon="swords"></mat-icon>
+        </div>
+    }
     <div class="round-slot">
         @if (!isFirstRound) {
             <div
