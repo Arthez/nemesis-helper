@@ -543,5 +543,8 @@
     "tk.about-modal.label.info.hotkey-next-step": "You can press \">\" on keyboard to trigger \"Next step\"",
     "tk.about-modal.label.info.hotkey-player-timer": "You can press \"1\", \"2\", \"3\", \"4\", on keyboard to toggle timer for \"X\" player when timers are enabled",
     "tk.about-modal.label.info.languages": "Two languages available: English, Polish (log records only available in english)",
-    "tk.about-modal.label.info.shuffling": "Monster token shuffling is based on triple Fisher–Yates shuffle algorithm"
+    "tk.about-modal.label.info.shuffling": "Monster token shuffling is based on triple Fisher–Yates shuffle algorithm",
+
+    "tk.exit-confirmation-modal.title": "Exit current game",
+    "tk.exit-confirmation-modal.message": "Are you sure you want to exit current game? All unsaved changes will be lost!"
 }

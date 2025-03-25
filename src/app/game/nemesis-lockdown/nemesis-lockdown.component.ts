@@ -284,7 +284,11 @@ export class NemesisLockdownComponent {
     }
 
     protected goToLandingPage(): void {
-        this.router.navigate(['/']);
+        this.nemesisLockdownModalService.openExitWarning().subscribe(result => {
+            if (result) {
+                this.router.navigate(['/']);
+            }
+        });
     }
 
     private getInitialRounds(): NldRoundItem[] {

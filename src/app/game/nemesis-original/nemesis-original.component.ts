@@ -242,7 +242,11 @@ export class NemesisOriginalComponent {
     }
 
     protected goToLandingPage(): void {
-        this.router.navigate(['/']);
+        this.nemesisOriginalModalService.openExitWarning().subscribe(result => {
+            if (result) {
+                this.router.navigate(['/']);
+            }
+        });
     }
 
     private getInitialRounds(): NogRoundItem[] {

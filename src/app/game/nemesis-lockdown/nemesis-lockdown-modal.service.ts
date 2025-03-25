@@ -231,4 +231,13 @@ export class NemesisLockdownModalService {
         );
     }
 
+    public openExitWarning(): Observable<boolean | undefined> {
+        return this.modalService.openConfirmation({
+            titleKey: 'tk.exit-confirmation-modal.title',
+            messageKey: 'tk.exit-confirmation-modal.message',
+            yesButtonKey: 'tk.general.label.button.continue',
+            noButtonKey: 'tk.general.label.button.back',
+        });
+    }
+
 }

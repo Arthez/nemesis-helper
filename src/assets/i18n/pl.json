@@ -543,5 +543,8 @@
     "tk.about-modal.label.info.hotkey-next-step": "Możesz wcisnąć \">\" na klawiaturze aby wywołać \"Następny krok\"",
     "tk.about-modal.label.info.hotkey-player-timer": "Możesz wcisnąć \"1\", \"2\", \"3\", \"4\", na klawiaturze aby przełączyć odliczanie czasu dla gracza \"X\" jeśli opcja naliczania czasu jest włączona",
     "tk.about-modal.label.info.languages": "Dostępne dwa języki: Polski, Angielski (logi dostępne są tylko w języku angielskim)",
-    "tk.about-modal.label.info.shuffling": "Tasowanie tokenów potworów bazuje na potrójnym Fisher–Yates algorytmie tasowania"
+    "tk.about-modal.label.info.shuffling": "Tasowanie tokenów potworów bazuje na potrójnym Fisher–Yates algorytmie tasowania",
+
+    "tk.exit-confirmation-modal.title": "Wyjdź z aktualnej rozgrywki",
+    "tk.exit-confirmation-modal.message": "Na pewno chcesz wyjść z aktualnej rozgrywki? Wszystkie niezapisane zmiany zostaną utracone!"
 }
